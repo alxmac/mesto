@@ -13,6 +13,17 @@
 @import url(../blocks/header/__logo/header__logo.css);
 
 /* блок content */
+@import url(../blocks/content/content.css);
+
+/* блок user */
+@import url(../blocks/user/user.css);
+@import url(../blocks/user/__data/user__data.css);
+@import url(../blocks/user/__avatar/user__avatar.css);
+@import url(../blocks/user/__info/user__info.css);
+@import url(../blocks/user/__name/user__name.css);
+@import url(../blocks/user/__description/user__description.css);
+@import url(../blocks/user/__edit-btn/user__edit-btn.css);
+@import url(../blocks/user/__add-btn/user__add-btn.css);
 
 /* блок footer */
 @import url(../blocks/footer/footer.css);

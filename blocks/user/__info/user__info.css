@@ -1,0 +1,7 @@
+.user__info {
+  max-width: 336px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  color: #fff;
+}

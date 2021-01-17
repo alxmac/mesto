@@ -1,0 +1,18 @@
+.content {
+  padding: 40px 200px 0 200px;
+}
+
+@media screen and (max-width: 1024px) {
+  .content {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .content {
+    padding-left: 19px;
+    padding-right: 19px;
+    padding-top: 42px;
+  }
+}
