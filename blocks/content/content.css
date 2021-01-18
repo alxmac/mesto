@@ -1,5 +1,5 @@
 .content {
-  padding: 40px 200px 0 200px;
+  padding: 40px 200px 66px 200px;
 }
 
 @media screen and (max-width: 1070px) {
@@ -19,6 +19,7 @@
 @media screen and (max-width: 425px) {
   .content {
     padding-top: 42px;
+    padding-bottom: 48px;
     padding-left: 19px;
     padding-right: 19px;
   }
