@@ -17,13 +17,20 @@
 
 /* блок user */
 @import url(../blocks/user/user.css);
-@import url(../blocks/user/__data/user__data.css);
 @import url(../blocks/user/__avatar/user__avatar.css);
+@import url(../blocks/user/__panel/user__panel.css);
 @import url(../blocks/user/__info/user__info.css);
 @import url(../blocks/user/__name/user__name.css);
-@import url(../blocks/user/__description/user__description.css);
+@import url(../blocks/user/__job/user__job.css);
 @import url(../blocks/user/__edit-btn/user__edit-btn.css);
 @import url(../blocks/user/__add-btn/user__add-btn.css);
+
+/* блок cards */
+@import url(../blocks/cards/cards.css);
+
+/* блок card */
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
 
 /* блок footer */
 @import url(../blocks/footer/footer.css);

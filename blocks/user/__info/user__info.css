@@ -3,5 +3,16 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  color: #fff;
+}
+
+@media screen and (max-width: 610px) {
+  .user__info {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .user__info {
+    max-width: 100%;
+  }
 }

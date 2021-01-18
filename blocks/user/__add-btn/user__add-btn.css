@@ -4,9 +4,27 @@
   height: 50px;
   border: 2px solid #fff;
   border-radius: 2px;
-
   background: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), #000;
   background-position: center;
-  background-size: 15% 2px, 2px 44%;
+  background-size: 22px 2px, 2px 22px;
   background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 950px) {
+  .user__add-btn {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .user__add-btn {
+    width: 80%;
+    background-size: 16px 2px, 2px 16px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .user__add-btn {
+    width: 100%;
+  }
 }
