@@ -5,15 +5,8 @@
 
 @media screen and (max-width: 1070px) {
   .inner-layout__header {
-    margin-left: 15%;
-    margin-right: 15%;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .inner-layout__header {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 13%;
+    margin-right: 13%;
   }
 }
 

@@ -1,6 +1,12 @@
 .card__info {
-  padding: 0 20px;
+  padding: 0 21px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media screen and (max-width: 425px) {
+  .card__info {
+    padding-right: 15px;
+  }
 }

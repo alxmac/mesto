@@ -3,11 +3,13 @@
   min-width: 320px;
   margin: 0 auto;
   padding-top: 45px;
+  padding-bottom: 60px;
   font-family: "Inter", sans-serif;
 }
 
 @media screen and (max-width: 425px) {
   .inner-layout {
     padding-top: 28px;
+    padding-bottom: 38px;
   }
 }
