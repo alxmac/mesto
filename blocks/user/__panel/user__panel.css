@@ -13,7 +13,7 @@
   }
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 660px) {
   .user__panel {
     align-items: center;
   }

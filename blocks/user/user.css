@@ -10,7 +10,7 @@
   }
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 660px) {
   .user {
     flex-direction: column;
     align-items: center;
