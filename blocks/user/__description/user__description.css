@@ -1,17 +1,17 @@
-.user__job {
+.user__description {
   margin: 16px 0 0 0;
   font-size: 18px;
   line-height: 22px;
 }
 
 @media screen and (max-width: 950px) {
-  .user__job {
+  .user__description {
     margin-bottom: 36px;
   }
 }
 
 @media screen and (max-width: 610px) {
-  .user__job {
+  .user__description {
     margin-top: 14px;
     font-size: 14px;
     line-height: 17px;
