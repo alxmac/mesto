@@ -112,20 +112,22 @@
       <footer class="footer">
         <p class="footer__text">&copy; 2021 Mesto Russia</p>
       </footer>
-    </div>
 
-    <section class="popup popup_opened">
-      <div class="popup__container">
-        <form class="form">
-          <p class="form__heading">Редактировать профиль</p>
-          <!-- <fieldset class="form__name">
-            <input type="text" />
-          </fieldset>
-          <fieldset class="form__job">
-            <input type="text" />
-          </fieldset> -->
-        </form>
-      </div>
-    </section>
+      <!-- Попап редактирования -->
+      <section class="popup popup_opened">
+        <div class="popup__container">
+          <form class="form">
+            <p class="form__heading">Редактировать профиль</p>
+            <fieldset class="form__input-container">
+              <input type="text" class="form__item form__item_el_name" />
+              <input type="text" class="form__item form__item_el_job" />
+            </fieldset>
+            <fieldset class="form__handler">
+              <input class="form__submit-button" type="submit" />
+            </fieldset>
+          </form>
+        </div>
+      </section>
+    </div>
   </body>
 </html>
