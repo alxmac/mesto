@@ -25,10 +25,10 @@
           <div class="user__panel">
             <div class="user__info">
               <h1 class="user__name">Жак-Ив Кусто</h1>
-              <button class="user__button user__button_type_edit"></button>
+              <input type="button" class="user__button user__button_type_edit"></input>
               <p class="user__job">Исследователь океана</p>
             </div>
-            <button class="user__button user__button_type_add"></button>
+            <input type="button" class="user__button user__button_type_add"></input>
           </div>
         </section>
 
@@ -114,8 +114,9 @@
       </footer>
 
       <!-- Попап редактирования -->
-      <section class="popup popup_opened">
+      <section class="popup">
         <div class="popup__container">
+          <input type="button" class="popup__close-button" />
           <form class="form">
             <p class="form__heading">Редактировать профиль</p>
             <fieldset class="form__input-container">
