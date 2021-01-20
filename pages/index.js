@@ -1,23 +1,41 @@
-const closeButton = document.querySelector(".popup__close-button");
-const editButton = document.querySelector(".user__button_type_edit");
-const popup = document.querySelector(".popup");
+// элементы блока user
+const userElement = document.querySelector(".user");
+const userName = userElement.querySelector(".user__name");
+const userDescription = userElement.querySelector(".user__description");
+const editButton = userElement.querySelector(".user__button_type_edit");
 
-// функция открытия и закрытия попапа
+// элементы блока popup
+const popup = document.querySelector(".popup");
+const closeButton = popup.querySelector(".popup__close-button");
+
+// элементы блока form
+const formElement = document.querySelector(".form");
+const nameInput = formElement.querySelector(".form__item_el_name");
+const descriptionInput = formElement.querySelector(
+  ".form__item_el_description"
+);
+
 const togglePopupVisibility = () => popup.classList.toggle("popup_opened");
 
 const showPopup = () => {
   togglePopupVisibility();
 
-  const name = document.querySelector(".user__name").innerHTML;
-  const description = document.querySelector(".user__description").innerHTML;
+  nameInput.value = userName.innerHTML;
+  descriptionInput.value = userDescription.innerHTML;
+};
 
-  const popupName = document.querySelector(".form__item_el_name");
-  const popupDescription = document.querySelector(".form__item_el_description");
+const formSubmitHandler = (evt) => {
+  evt.preventDefault();
 
-  popupName.value = name;
-  popupDescription.value = description;
+  const nameValue = nameInput.value;
+  const descriptionValue = descriptionInput.value;
 
+  userName.textContent = `${nameValue}`;
+  userDescription.textContent = `${descriptionValue}`;
+
+  togglePopupVisibility();
 };
 
 editButton.addEventListener("click", showPopup);
 closeButton.addEventListener("click", togglePopupVisibility);
+formElement.addEventListener("submit", formSubmitHandler);
