@@ -28,8 +28,9 @@
 @import url(../blocks/user/__info/user__info.css);
 @import url(../blocks/user/__name/user__name.css);
 @import url(../blocks/user/__job/user__job.css);
-@import url(../blocks/user/__edit-btn/user__edit-btn.css);
-@import url(../blocks/user/__add-btn/user__add-btn.css);
+@import url(../blocks/user/__button/user__button.css);
+@import url(../blocks/user/__button/_type/user__button_type_add.css);
+@import url(../blocks/user/__button/_type/user__button_type_edit.css);
 
 /* блок cards */
 @import url(../blocks/cards/cards.css);
@@ -39,7 +40,8 @@
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__info/card__info.css);
 @import url(../blocks/card/__title/card__title.css);
-@import url(../blocks/card/__like-icon/card__like-icon.css);
+@import url(../blocks/card/__like-button/card__like-button.css);
+@import url(../blocks/card/__like-button/_active/card__like-button_active.css);
 
 /* блок footer */
 @import url(../blocks/footer/footer.css);
