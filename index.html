@@ -10,7 +10,13 @@
     <div class="inner-layout">
       <!-- Шапка сайта -->
       <header class="header inner-layout__header">
-        <a href="/" target="_self" class="header__logo"></a>
+        <a href="/" target="_self" class="header__logo">
+          <img
+            src="./images/header-logo.svg"
+            alt="Логотип"
+            class="header__image"
+          />
+        </a>
       </header>
 
       <!-- Секция content -->
@@ -40,7 +46,7 @@
 
         <!-- Секция cards -->
         <section class="cards">
-          <section class="card">
+          <div class="card">
             <img
               src="./images/card-baikal.jpeg"
               alt="Байкал"
@@ -48,14 +54,13 @@
             />
             <div class="card__info">
               <h2 class="card__title">Байкал</h2>
-              <a
-                href="#"
-                target="_self"
+              <button
+                type="button"
                 class="card__like-button card__like-button_active"
-              ></a>
+              ></button>
             </div>
-          </section>
-          <section class="card">
+          </div>
+          <div class="card">
             <img
               src="./images/card-vladivostok.jpeg"
               alt="Владивосток"
@@ -63,10 +68,10 @@
             />
             <div class="card__info">
               <h2 class="card__title">Владивосток</h2>
-              <a href="#" target="_self" class="card__like-button"></a>
+              <button type="button" class="card__like-button"></button>
             </div>
-          </section>
-          <section class="card">
+          </div>
+          <div class="card">
             <img
               src="./images/card-kolsky.jpg"
               alt="Кольский полуостров"
@@ -74,11 +79,10 @@
             />
             <div class="card__info">
               <h2 class="card__title">Кольский Полуостров</h2>
-              <a href="#" target="_self" class="card__like-button"></a>
+              <button type="button" class="card__like-button"></button>
             </div>
-          </section>
-
-          <section class="card">
+          </div>
+          <div class="card">
             <img
               src="./images/card-kosa.jpg"
               alt="Куршская коса"
@@ -86,10 +90,10 @@
             />
             <div class="card__info">
               <h2 class="card__title">Куршская коса</h2>
-              <a href="#" target="_self" class="card__like-button"></a>
+              <button type="button" class="card__like-button"></button>
             </div>
-          </section>
-          <section class="card">
+          </div>
+          <div class="card">
             <img
               src="./images/card-sochi.jpeg"
               alt="Сочи"
@@ -97,10 +101,10 @@
             />
             <div class="card__info">
               <h2 class="card__title">Сочи</h2>
-              <a href="#" target="_self" class="card__like-button"></a>
+              <button type="button" class="card__like-button"></button>
             </div>
-          </section>
-          <section class="card">
+          </div>
+          <div class="card">
             <img
               src="./images/card-khibiny.jpeg"
               alt="Хибины"
@@ -108,9 +112,9 @@
             />
             <div class="card__info">
               <h2 class="card__title">Хибины</h2>
-              <a href="#" target="_self" class="card__like-button"></a>
+              <button type="button" class="card__like-button"></button>
             </div>
-          </section>
+          </div>
         </section>
       </main>
 
@@ -123,28 +127,28 @@
       <section class="popup">
         <div class="popup__container">
           <button type="button" class="popup__close-button"></button>
-          <form class="form">
-            <p class="form__heading">Редактировать профиль</p>
+          <form name="form" class="form">
+            <h3 class="form__heading">Редактировать профиль</h3>
             <fieldset class="form__input-container">
               <input
                 type="text"
+                name="user-name"
                 placeholder="Имя"
                 class="form__item form__item_el_name"
               />
               <input
                 type="text"
+                name="description"
                 placeholder="О себе"
                 class="form__item form__item_el_description"
               />
             </fieldset>
-            <fieldset class="form__handler">
-              <input class="form__submit-button" type="submit" />
-            </fieldset>
+            <input class="form__submit-button" type="submit" />
           </form>
         </div>
       </section>
     </div>
 
-    <script src="pages/index.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

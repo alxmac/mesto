@@ -10,27 +10,22 @@ let closeButton = popup.querySelector(".popup__close-button");
 // элементы блока form
 let formElement = document.querySelector(".form");
 let nameInput = formElement.querySelector(".form__item_el_name");
-let descriptionInput = formElement.querySelector(
-  ".form__item_el_description"
-);
+let descriptionInput = formElement.querySelector(".form__item_el_description");
 
 const togglePopupVisibility = () => popup.classList.toggle("popup_opened");
 
 const showPopup = () => {
   togglePopupVisibility();
 
-  nameInput.value = userName.innerHTML;
-  descriptionInput.value = userDescription.innerHTML;
+  nameInput.value = userName.textContent;
+  descriptionInput.value = userDescription.textContent;
 };
 
 const formSubmitHandler = (evt) => {
   evt.preventDefault();
 
-  const nameValue = nameInput.value;
-  const descriptionValue = descriptionInput.value;
-
-  userName.textContent = `${nameValue}`;
-  userDescription.textContent = `${descriptionValue}`;
+  userName.textContent = `${nameInput.value}`;
+  userDescription.textContent = `${descriptionInput.value}`;
 
   togglePopupVisibility();
 };
