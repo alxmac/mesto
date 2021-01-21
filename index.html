@@ -25,10 +25,16 @@
           <div class="user__panel">
             <div class="user__info">
               <h1 class="user__name">Жак-Ив Кусто</h1>
-              <input type="button" class="user__button user__button_type_edit"></input>
+              <button
+                type="button"
+                class="user__button user__button_type_edit"
+              ></button>
               <p class="user__description">Исследователь океана</p>
             </div>
-            <input type="button" class="user__button user__button_type_add"></input>
+            <button
+              type="button"
+              class="user__button user__button_type_add"
+            ></button>
           </div>
         </section>
 
@@ -42,7 +48,11 @@
             />
             <div class="card__info">
               <h2 class="card__title">Байкал</h2>
-              <a href="#" target="_self" class="card__like-button card__like-button_active"></a>
+              <a
+                href="#"
+                target="_self"
+                class="card__like-button card__like-button_active"
+              ></a>
             </div>
           </section>
           <section class="card">
@@ -98,11 +108,7 @@
             />
             <div class="card__info">
               <h2 class="card__title">Хибины</h2>
-              <a
-                href="#"
-                target="_self"
-                class="card__like-button"
-              ></a>
+              <a href="#" target="_self" class="card__like-button"></a>
             </div>
           </section>
         </section>
@@ -116,12 +122,20 @@
       <!-- Попап редактирования -->
       <section class="popup">
         <div class="popup__container">
-          <input type="button" class="popup__close-button" />
+          <button type="button" class="popup__close-button"></button>
           <form class="form">
             <p class="form__heading">Редактировать профиль</p>
             <fieldset class="form__input-container">
-              <input type="text" placeholder="Имя" class="form__item form__item_el_name" />
-              <input type="text" placeholder="О себе" class="form__item form__item_el_description" />
+              <input
+                type="text"
+                placeholder="Имя"
+                class="form__item form__item_el_name"
+              />
+              <input
+                type="text"
+                placeholder="О себе"
+                class="form__item form__item_el_description"
+              />
             </fieldset>
             <fieldset class="form__handler">
               <input class="form__submit-button" type="submit" />
