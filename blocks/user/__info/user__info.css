@@ -1,18 +1,4 @@
 .user__info {
-  max-width: 336px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-@media screen and (max-width: 660px) {
-  .user__info {
-    justify-content: center;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .user__info {
-    max-width: 100%;
-  }
+  display: grid;
+  grid-template-columns: fit-content(300px) 1fr;
 }

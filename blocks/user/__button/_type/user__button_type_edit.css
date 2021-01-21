@@ -1,6 +1,7 @@
 .user__button_type_edit {
   width: 24px;
   height: 24px;
+  margin-left: 18px;
   align-self: center;
   border-width: 1px;
   background-image: url('../../../../images/user-edit-btn-pic.svg');
@@ -9,6 +10,7 @@
 
 @media screen and (max-width: 660px) {
   .user__button_type_edit {
+    margin-left: 10px;
     width: 18px;
     height: 18px;
   }

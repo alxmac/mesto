@@ -1,6 +1,7 @@
 .user__description {
   margin: 16px 0 0 0;
-  max-width: 100%;
+  max-width: 336px;
+  grid-column: 1/4;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -14,9 +15,11 @@
   }
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 660px) {
   .user__description {
+    max-width: 100%;
     margin-top: 14px;
+    justify-self: center;
     font-size: 14px;
     line-height: 17px;
   }

@@ -1,13 +1,6 @@
 .user {
   padding-bottom: 50px;
   display: flex;
-  align-items: center;
-}
-
-@media screen and (max-width: 950px) {
-  .user {
-    align-items: flex-start;
-  }
 }
 
 @media screen and (max-width: 660px) {
