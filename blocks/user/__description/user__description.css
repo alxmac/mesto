@@ -1,5 +1,9 @@
 .user__description {
   margin: 16px 0 0 0;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-size: 18px;
   line-height: 22px;
 }

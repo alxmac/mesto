@@ -1,8 +1,7 @@
 // элементы блока user
-const userElement = document.querySelector(".user");
-const userName = userElement.querySelector(".user__name");
-const userDescription = userElement.querySelector(".user__description");
-const editButton = userElement.querySelector(".user__button_type_edit");
+const userName = document.querySelector(".user__name");
+const userDescription = document.querySelector(".user__description");
+const editButton = document.querySelector(".user__button_type_edit");
 
 // элементы блока popup
 const popup = document.querySelector(".popup");
