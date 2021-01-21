@@ -1,17 +1,22 @@
-# Проект 4: Место
+# Mesto
 
-### Обзор
+**Проектная работа 4**  
+**Mesto:** интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 
-* Figma
-* Картинки
+[Ссылка](https://alxmac.github.io/mesto/) на сайт.
 
-**Figma**
+### Функционал
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+* Редактирование профиля пользователя
 
-**Картинки**
+### Технологии
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+* Flexbox
+* Grid Layout
+* BEM
+* JavaScript (DOM API)
 
-Удачи!
+### Quick Start
+
+- [Скачать с Github](https://github.com/alxmac/mesto).
+- Клонировать репозиторий: `git clone https://github.com/alxmac/mesto.git`.
