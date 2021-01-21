@@ -8,6 +8,7 @@
   line-height: 22px;
   text-align: center;
   color: #fff;
+  transition: opacity 0.2s linear;
 }
 
 .form__submit-button:hover {

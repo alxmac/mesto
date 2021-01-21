@@ -3,6 +3,7 @@
   border: solid #fff;
   background-position: center;
   background-repeat: no-repeat;
+  transition: opacity 0.2s linear;
 }
 
 .user__button:hover {

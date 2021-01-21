@@ -1,16 +1,16 @@
 // элементы блока user
-const userName = document.querySelector(".user__name");
-const userDescription = document.querySelector(".user__description");
-const editButton = document.querySelector(".user__button_type_edit");
+let userName = document.querySelector(".user__name");
+let userDescription = document.querySelector(".user__description");
+let editButton = document.querySelector(".user__button_type_edit");
 
 // элементы блока popup
-const popup = document.querySelector(".popup");
-const closeButton = popup.querySelector(".popup__close-button");
+let popup = document.querySelector(".popup");
+let closeButton = popup.querySelector(".popup__close-button");
 
 // элементы блока form
-const formElement = document.querySelector(".form");
-const nameInput = formElement.querySelector(".form__item_el_name");
-const descriptionInput = formElement.querySelector(
+let formElement = document.querySelector(".form");
+let nameInput = formElement.querySelector(".form__item_el_name");
+let descriptionInput = formElement.querySelector(
   ".form__item_el_description"
 );
 

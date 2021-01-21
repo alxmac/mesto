@@ -2,6 +2,7 @@
     width: 22px;
     height: 19px;
     background-image: url(../../../images/card-like-icon.svg);
+    transition: opacity 0.2s linear;
 }
 
 .card__like-button:hover {
