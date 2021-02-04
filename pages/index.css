@@ -16,8 +16,6 @@
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/form/__input-container/form__input-container.css);
 @import url(../blocks/form/__item/form__item.css);
-@import url(../blocks/form/__item/_el/form__item_el_name.css);
-@import url(../blocks/form/__item/_el/form__item_el_description.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);
 
 /* блок header */
@@ -44,6 +42,7 @@
 
 /* блок card */
 @import url(../blocks/card/card.css);
+@import url(../blocks/card/__image-wrapper/card__image-wrapper.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__info/card__info.css);
 @import url(../blocks/card/__title/card__title.css);

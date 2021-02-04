@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
+    <script type="module" src="./scripts/index.js"></script>
     <title>Mesto</title>
   </head>
   <body class="body">
@@ -45,77 +46,7 @@
         </section>
 
         <!-- Секция cards -->
-        <section class="cards">
-          <div class="card">
-            <img
-              src="./images/card-baikal.jpeg"
-              alt="Байкал"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Байкал</h2>
-              <button
-                type="button"
-                class="card__like-button card__like-button_active"
-              ></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/card-vladivostok.jpeg"
-              alt="Владивосток"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Владивосток</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/card-kolsky.jpg"
-              alt="Кольский полуостров"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Кольский Полуостров</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/card-kosa.jpg"
-              alt="Куршская коса"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Куршская коса</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/card-sochi.jpeg"
-              alt="Сочи"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Сочи</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/card-khibiny.jpeg"
-              alt="Хибины"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Хибины</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </div>
-        </section>
+        <section class="cards"></section>
       </main>
 
       <!-- Подвал сайта -->
@@ -124,31 +55,33 @@
       </footer>
 
       <!-- Попап редактирования -->
-      <section class="popup">
-        <div class="popup__container">
-          <button type="button" class="popup__close-button"></button>
-          <form name="form" class="form">
-            <h3 class="form__heading">Редактировать профиль</h3>
-            <fieldset class="form__input-container">
-              <input
-                type="text"
-                name="user-name"
-                placeholder="Имя"
-                class="form__item form__item_el_name"
-              />
-              <input
-                type="text"
-                name="description"
-                placeholder="О себе"
-                class="form__item form__item_el_description"
-              />
-            </fieldset>
-            <input class="form__submit-button" type="submit" />
-          </form>
-        </div>
-      </section>
+      <section class="popup"></section>
     </div>
 
-    <script src="./scripts/index.js"></script>
+    <template id="popup__container">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+        <form name="form" class="form">
+          <h3 class="form__heading"></h3>
+          <fieldset class="form__input-container">
+            <input type="text" class="form__item" />
+            <input type="text" class="form__item" />
+          </fieldset>
+          <input class="form__submit-button" type="submit" />
+        </form>
+      </div>
+    </template>
+
+    <template id="card">
+      <div class="card">
+        <div class="card__image-wrapper">
+          <img class="card__image" />
+        </div>
+        <div class="card__info">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like-button"></button>
+        </div>
+      </div>
+    </template>
   </body>
 </html>
