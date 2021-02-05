@@ -11,7 +11,7 @@
   background: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100% 4px, 4px 100%;
+  background-size: 100% 3px, 3px 100%;
 }
 
 .popup__close-button:hover {

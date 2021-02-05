@@ -1,42 +1,13 @@
 import { initialCards, popupFields } from "../config.js";
 
+const popup = document.querySelector(".popup");
+const cards = document.querySelector(".cards");
 const userName = document.querySelector(".user__name");
 const userDescription = document.querySelector(".user__description");
 const addButton = document.querySelector(".user__button_type_add");
 const editButton = document.querySelector(".user__button_type_edit");
-const cards = document.querySelector(".cards");
-const popup = document.querySelector(".popup");
 
-const renderCards = () => {
-  const cardTemplate = document.querySelector("#card").content;
-
-  // получаем массив карточек для отображения в блоке cards
-  const сardsArray = initialCards.map(({ name, link }) => {
-    const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-
-    cardElement.querySelector(".card__image").src = link;
-    cardElement.querySelector(".card__image").alt = name;
-    cardElement.querySelector(".card__title").textContent = name;
-
-    return cardElement;
-  });
-
-  cards.append(...сardsArray);
-};
-
-const togglePopupVisibility = () => popup.classList.toggle("popup_opened");
-
-const openPopup = (type) => {
-  togglePopupVisibility();
-  renderPopupContainer(type);
-};
-
-const closePopup = () => {
-  togglePopupVisibility();
-  popup.querySelector(".popup__container").remove();
-};
-
-const addCard = (name, link) => {
+const getCard = (name, link) => {
   const cardTemplate = document.querySelector("#card").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
@@ -44,23 +15,51 @@ const addCard = (name, link) => {
   cardElement.querySelector(".card__image").alt = name;
   cardElement.querySelector(".card__title").textContent = name;
 
-  cards.prepend(cardElement);
+  const likeButton = cardElement.querySelector(".card__like-button");
+
+  likeButton.addEventListener("click", () =>
+    likeButton.classList.toggle("card__like-button_active")
+  );
+
+  return cardElement;
 };
 
-const formSubmitHandler = (evt, type, ...rest) => {
+const renderCards = () => {
+  const сardsArray = initialCards.map(({ name, link }) => getCard(name, link));
+
+  cards.append(...сardsArray);
+};
+
+const togglePopupVisibility = () => popup.classList.toggle("popup_opened");
+
+const removePopupContainer = () =>
+  popup.querySelector(".popup__close-button").parentElement.remove();
+
+const closePopup = () => {
+  togglePopupVisibility();
+  removePopupContainer();
+};
+
+const openPopup = (type) => {
+  togglePopupVisibility();
+  renderPopupContainer(type);
+};
+
+const formSubmitHandler = (evt, type, ...inputValues) => {
   evt.preventDefault();
 
-  const [firstValue, secondValue] = rest;
+  const [firstValue, secondValue] = inputValues;
 
   if (type === "edit") {
     userName.textContent = firstValue;
     userDescription.textContent = secondValue;
   } else {
-    addCard(firstValue, secondValue);
+    const card = getCard(firstValue, secondValue);
+    cards.prepend(card);
   }
 
   togglePopupVisibility();
-  popup.querySelector(".popup__container").remove();
+  removePopupContainer();
 };
 
 const renderPopupContainer = (type) => {
