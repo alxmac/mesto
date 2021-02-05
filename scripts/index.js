@@ -7,7 +7,7 @@ const userDescription = document.querySelector(".user__description");
 const addButton = document.querySelector(".user__button_type_add");
 const editButton = document.querySelector(".user__button_type_edit");
 
-const getCard = (name, link) => {
+const addCard = (name, link) => {
   const cardTemplate = document.querySelector("#card").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
@@ -25,7 +25,7 @@ const getCard = (name, link) => {
 };
 
 const renderCards = () => {
-  const сardsArray = initialCards.map(({ name, link }) => getCard(name, link));
+  const сardsArray = initialCards.map(({ name, link }) => addCard(name, link));
 
   cards.append(...сardsArray);
 };
@@ -54,7 +54,7 @@ const formSubmitHandler = (evt, type, ...inputValues) => {
     userName.textContent = firstValue;
     userDescription.textContent = secondValue;
   } else {
-    const card = getCard(firstValue, secondValue);
+    const card = addCard(firstValue, secondValue);
     cards.prepend(card);
   }
 
