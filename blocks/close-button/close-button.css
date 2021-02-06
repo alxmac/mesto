@@ -1,27 +1,22 @@
-.popup__close-button {
-  padding: 0;
+.close-button {
   width: 40px;
   height: 40px;
-  position: absolute;
-  top: 0;
-  right: 0;
+  padding: 0;
   border: 0;
-  transform: translate(100%, -100%) rotate(-45deg);
-  transition: opacity 0.2s linear;
   background: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 3px, 3px 100%;
+  transition: opacity 0.2s linear;
 }
 
-.popup__close-button:hover {
+.close-button:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 550px) {
-  .popup__close-button {
-    transform: translateY(-150%) rotate(-45deg);
+  .close-button {
     width: 26px;
     height: 26px;
     background-size: 100% 2px, 2px 100%;

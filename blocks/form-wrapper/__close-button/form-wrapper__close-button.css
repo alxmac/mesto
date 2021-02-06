@@ -1,0 +1,12 @@
+.form-wrapper__close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(100%, -100%) rotate(-45deg);
+}
+
+@media screen and (max-width: 550px) {
+  .form-wrapper__close-button {
+    transform: translateY(-150%) rotate(-45deg);
+  }
+}

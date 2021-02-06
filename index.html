@@ -55,11 +55,11 @@
       </footer>
 
       <!-- Попап -->
-      <section class="popup"></section>
+      <section class="popup inner-layout__popup"></section>
     </div>
 
-    <template id="popup__container">
-      <div class="popup__container">
+    <template id="form-wrapper">
+      <div class="form-wrapper">
         <form name="form" class="form">
           <h3 class="form__heading"></h3>
           <fieldset class="form__input-container">
@@ -68,7 +68,23 @@
           </fieldset>
           <input class="form__submit-button" type="submit" />
         </form>
-        <button type="button" class="popup__close-button"></button>
+        <button
+          type="button"
+          class="close-button form-wrapper__close-button"
+        ></button>
+      </div>
+    </template>
+
+    <template id="image-full-wrapper">
+      <div class="image-full-wrapper">
+        <figure class="image-full-container">
+          <img class="image-full-container__image" />
+          <figcaption class="image-full-container__caption"></figcaption>
+        </figure>
+        <button
+          type="button"
+          class="close-button image-full-wrapper__close-button"
+        ></button>
       </div>
     </template>
 
