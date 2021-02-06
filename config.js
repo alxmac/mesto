@@ -31,7 +31,7 @@ export const initialCards = [
   },
 ];
 
-export const popupFields = {
+export const formFields = {
   add: {
     heading: "Новое место",
     firstField: {

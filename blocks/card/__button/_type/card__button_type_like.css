@@ -1,0 +1,9 @@
+.card__button_type_like {
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../../images/card-like-icon.svg);
+}
+
+.card__button_type_like:hover {
+  opacity: 0.5;
+}

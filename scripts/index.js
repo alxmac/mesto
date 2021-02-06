@@ -1,9 +1,11 @@
-import { initialCards, popupFields } from "../config.js";
+import { initialCards, formFields } from "../config.js";
 
-const popup = document.querySelector(".popup");
 const cards = document.querySelector(".cards");
+const popup = document.querySelector(".popup");
+
 const userName = document.querySelector(".user__name");
 const userDescription = document.querySelector(".user__description");
+
 const addButton = document.querySelector(".user__button_type_add");
 const editButton = document.querySelector(".user__button_type_edit");
 
@@ -15,16 +17,21 @@ const addCard = (name, link) => {
   cardElement.querySelector(".card__image").alt = name;
   cardElement.querySelector(".card__title").textContent = name;
 
-  const likeButton = cardElement.querySelector(".card__like-button");
+  const likeButton = cardElement.querySelector(".card__button_type_like");
+  const trashButton = cardElement.querySelector(".card__button_type_trash");
 
   likeButton.addEventListener("click", () =>
-    likeButton.classList.toggle("card__like-button_active")
+    likeButton.classList.toggle("card__button_type_like-active")
+  );
+
+  trashButton.addEventListener("click", () =>
+    trashButton.parentElement.remove()
   );
 
   return cardElement;
 };
 
-const renderCards = () => {
+const renderInitialCards = () => {
   const сardsArray = initialCards.map(({ name, link }) => addCard(name, link));
 
   cards.append(...сardsArray);
@@ -32,38 +39,16 @@ const renderCards = () => {
 
 const togglePopupVisibility = () => popup.classList.toggle("popup_opened");
 
-const removePopupContainer = () =>
+const removePopupContent = () =>
   popup.querySelector(".popup__close-button").parentElement.remove();
 
 const closePopup = () => {
   togglePopupVisibility();
-  removePopupContainer();
+  removePopupContent();
 };
 
-const openPopup = (type) => {
-  togglePopupVisibility();
-  renderPopupContainer(type);
-};
-
-const formSubmitHandler = (evt, type, ...inputValues) => {
-  evt.preventDefault();
-
-  const [firstValue, secondValue] = inputValues;
-
-  if (type === "edit") {
-    userName.textContent = firstValue;
-    userDescription.textContent = secondValue;
-  } else {
-    const card = addCard(firstValue, secondValue);
-    cards.prepend(card);
-  }
-
-  togglePopupVisibility();
-  removePopupContainer();
-};
-
-const renderPopupContainer = (type) => {
-  const { heading, firstField, secondField } = popupFields[type];
+const renderPopupContent = (type) => {
+  const { heading, firstField, secondField } = formFields[type];
 
   const popupTemplate = document.querySelector("#popup__container").content;
   const popupContainer = popupTemplate
@@ -96,6 +81,28 @@ const renderPopupContainer = (type) => {
   );
 };
 
-renderCards();
+const openPopup = (type) => {
+  togglePopupVisibility();
+  renderPopupContent(type);
+};
+
+const formSubmitHandler = (evt, type, ...inputValues) => {
+  evt.preventDefault();
+
+  const [firstValue, secondValue] = inputValues;
+
+  if (type === "edit") {
+    userName.textContent = firstValue;
+    userDescription.textContent = secondValue;
+  } else {
+    const newCard = addCard(firstValue, secondValue);
+    cards.prepend(newCard);
+  }
+
+  togglePopupVisibility();
+  removePopupContent();
+};
+
+renderInitialCards();
 addButton.addEventListener("click", () => openPopup("add"));
 editButton.addEventListener("click", () => openPopup("edit"));
