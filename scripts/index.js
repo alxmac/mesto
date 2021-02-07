@@ -1,4 +1,4 @@
-import { initialCards, formFields } from "../config.js";
+import { initialCards, formFields } from "../configs/index.js";
 
 const cards = document.querySelector(".cards");
 const popup = document.querySelector(".popup");
@@ -9,13 +9,12 @@ const userDescription = document.querySelector(".user__description");
 const addButton = document.querySelector(".user__button_type_add");
 const editButton = document.querySelector(".user__button_type_edit");
 
-const togglePopupVisibility = () => popup.classList.toggle("popup_opened");
-
 const removePopupContent = () =>
   popup.querySelector(".close-button").parentElement.remove();
 
 const closePopup = () => {
-  togglePopupVisibility();
+  popup.classList.remove("popup_type_image", "popup_type_form", "popup_opened");
+
   removePopupContent();
 };
 
@@ -24,7 +23,7 @@ const formSubmitHandler = (evt, type, ...inputValues) => {
 
   const [firstValue, secondValue] = inputValues;
 
-  if (type === "edit") {
+  if (type === "editForm") {
     userName.textContent = firstValue;
     userDescription.textContent = secondValue;
   } else {
@@ -32,8 +31,7 @@ const formSubmitHandler = (evt, type, ...inputValues) => {
     cards.prepend(newCard);
   }
 
-  togglePopupVisibility();
-  removePopupContent();
+  closePopup();
 };
 
 const renderFrom = (type) => {
@@ -52,7 +50,7 @@ const renderFrom = (type) => {
   secondInput.placeholder = secondField.placeholder;
   formWrapper.querySelector(".form__heading").textContent = heading;
 
-  if (type === "edit") {
+  if (type === "editForm") {
     firstInput.value = userName.textContent;
     secondInput.value = userDescription.textContent;
   }
@@ -60,53 +58,64 @@ const renderFrom = (type) => {
   popup.append(formWrapper);
 
   const closeButton = popup.querySelector(".close-button");
-  const formElement = popup.querySelector(".form");
+  const form = popup.querySelector(".form");
 
   closeButton.addEventListener("click", closePopup);
-  formElement.addEventListener("submit", (evt) =>
+  form.addEventListener("submit", (evt) =>
     formSubmitHandler(evt, type, firstInput.value, secondInput.value)
   );
 };
 
-const renderFullImage = (evt) => {
-  const imageWrapperTemplate = document.querySelector("#image-full-wrapper")
-    .content;
-  const imageWrapper = imageWrapperTemplate
-    .querySelector(".image-full-wrapper")
+const renderImagePreview = (evt) => {
+  const imagePreviewWrapperTemplate = document.querySelector(
+    "#image-preview-wrapper"
+  ).content;
+  const imagePreviewWrapper = imagePreviewWrapperTemplate
+    .querySelector(".image-preview-wrapper")
     .cloneNode(true);
 
-  const imageFull = imageWrapper.querySelector(".image-full-container__image");
-  const caption = imageWrapper.querySelector(".image-full-container__caption");
-  imageFull.alt = evt.target.alt;
-  imageFull.src = evt.target.src;
+  const image = imagePreviewWrapper.querySelector(
+    ".image-preview-container__image"
+  );
+  const caption = imagePreviewWrapper.querySelector(
+    ".image-preview-container__caption"
+  );
+  image.alt = evt.target.alt;
+  image.src = evt.target.src;
   caption.textContent = evt.target.alt;
 
-  popup.append(imageWrapper);
+  popup.append(imagePreviewWrapper);
 
   const closeButton = popup.querySelector(".close-button");
   closeButton.addEventListener("click", closePopup);
 };
 
 const openPopup = (type, evt) => {
-  togglePopupVisibility();
+  popup.classList.add("popup_opened");
 
-  type === "zoom" ? renderFullImage(evt) : renderFrom(type);
+  if (type === "imagePreview") {
+    popup.classList.add("popup_type_image");
+    renderImagePreview(evt);
+  } else {
+    popup.classList.add("popup_type_form");
+    renderFrom(type);
+  }
 };
 
 const addCard = (name, link) => {
   const cardTemplate = document.querySelector("#card").content;
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const card = cardTemplate.querySelector(".card").cloneNode(true);
 
-  cardElement.querySelector(".card__title").textContent = name;
+  card.querySelector(".card__title").textContent = name;
 
-  const cardImage = cardElement.querySelector(".card__image");
-  const likeButton = cardElement.querySelector(".card__button_type_like");
-  const trashButton = cardElement.querySelector(".card__button_type_trash");
+  const image = card.querySelector(".card__image");
+  const likeButton = card.querySelector(".card__button_type_like");
+  const trashButton = card.querySelector(".card__button_type_trash");
 
-  cardImage.src = link;
-  cardImage.alt = name;
+  image.src = link;
+  image.alt = name;
 
-  cardImage.addEventListener("click", (evt) => openPopup("zoom", evt));
+  image.addEventListener("click", (evt) => openPopup("imagePreview", evt));
 
   likeButton.addEventListener("click", () =>
     likeButton.classList.toggle("card__button_type_like-active")
@@ -116,7 +125,7 @@ const addCard = (name, link) => {
     trashButton.parentElement.remove()
   );
 
-  return cardElement;
+  return card;
 };
 
 const renderInitialCards = () => {
@@ -126,5 +135,5 @@ const renderInitialCards = () => {
 };
 
 renderInitialCards();
-addButton.addEventListener("click", () => openPopup("add"));
-editButton.addEventListener("click", () => openPopup("edit"));
+addButton.addEventListener("click", () => openPopup("addForm"));
+editButton.addEventListener("click", () => openPopup("editForm"));

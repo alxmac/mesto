@@ -1,3 +1,28 @@
+export const formFields = {
+  addForm: {
+    heading: "Новое место",
+    firstField: {
+      name: "place-name",
+      placeholder: "Название",
+    },
+    secondField: {
+      name: "link",
+      placeholder: "Ссылка на картинку",
+    },
+  },
+  editForm: {
+    heading: "Редактировать профиль",
+    firstField: {
+      name: "user-name",
+      placeholder: "Имя",
+    },
+    secondField: {
+      name: "description",
+      placeholder: "О себе",
+    },
+  },
+};
+
 export const initialCards = [
   {
     name: "Архыз",
@@ -30,28 +55,3 @@ export const initialCards = [
       "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
   },
 ];
-
-export const formFields = {
-  add: {
-    heading: "Новое место",
-    firstField: {
-      name: "place-name",
-      placeholder: "Название",
-    },
-    secondField: {
-      name: "link",
-      placeholder: "Ссылка на картинку",
-    },
-  },
-  edit: {
-    heading: "Редактировать профиль",
-    firstField: {
-      name: "user-name",
-      placeholder: "Имя",
-    },
-    secondField: {
-      name: "description",
-      placeholder: "О себе",
-    },
-  },
-};
