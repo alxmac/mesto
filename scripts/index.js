@@ -1,7 +1,7 @@
 import { initialCards, formFields } from "../configs/index.js";
 
+const innerLayout = document.querySelector(".inner-layout");
 const cards = document.querySelector(".cards");
-const popup = document.querySelector(".popup");
 
 const userName = document.querySelector(".user__name");
 const userDescription = document.querySelector(".user__description");
@@ -9,13 +9,11 @@ const userDescription = document.querySelector(".user__description");
 const addButton = document.querySelector(".user__button_type_add");
 const editButton = document.querySelector(".user__button_type_edit");
 
-const removePopupContent = () =>
-  popup.querySelector(".close-button").parentElement.remove();
-
 const closePopup = () => {
-  popup.classList.remove("popup_type_image", "popup_type_form", "popup_opened");
+  const popup = innerLayout.querySelector(".popup");
 
-  removePopupContent();
+  popup.classList.remove("popup_type_image", "popup_type_form", "popup_opened");
+  popup.querySelector(".close-button").parentElement.remove();
 };
 
 const formSubmitHandler = (evt, type, ...inputValues) => {
@@ -55,6 +53,7 @@ const renderFrom = (type) => {
     secondInput.value = userDescription.textContent;
   }
 
+  const popup = innerLayout.querySelector(".popup");
   popup.append(formWrapper);
 
   const closeButton = popup.querySelector(".close-button");
@@ -84,6 +83,7 @@ const renderImagePreview = (evt) => {
   image.src = evt.target.src;
   caption.textContent = evt.target.alt;
 
+  const popup = innerLayout.querySelector(".popup");
   popup.append(imagePreviewWrapper);
 
   const closeButton = popup.querySelector(".close-button");
@@ -91,6 +91,7 @@ const renderImagePreview = (evt) => {
 };
 
 const openPopup = (type, evt) => {
+  const popup = innerLayout.querySelector(".popup");
   popup.classList.add("popup_opened");
 
   if (type === "imagePreview") {
@@ -134,6 +135,14 @@ const renderInitialCards = () => {
   cards.append(...сardsArray);
 };
 
+const renderPopup = () => {
+  const popupTemplate = document.querySelector("#popup").content;
+  const popup = popupTemplate.querySelector(".popup").cloneNode(true);
+
+  innerLayout.append(popup);
+};
+
 renderInitialCards();
+renderPopup();
 addButton.addEventListener("click", () => openPopup("addForm"));
 editButton.addEventListener("click", () => openPopup("editForm"));
