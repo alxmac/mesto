@@ -1,4 +1,4 @@
-.form-wrapper__close-button {
+.popup__close-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 550px) {
-  .form-wrapper__close-button {
+  .popup__close-button {
     transform: translateY(-150%) rotate(-45deg);
   }
 }

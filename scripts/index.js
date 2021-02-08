@@ -1,6 +1,5 @@
-import { initialCards, formFields } from "../configs/index.js";
+import { initialCards } from "../configs/index.js";
 
-const innerLayout = document.querySelector(".inner-layout");
 const cards = document.querySelector(".cards");
 
 const userName = document.querySelector(".user__name");
@@ -9,140 +8,110 @@ const userDescription = document.querySelector(".user__description");
 const addButton = document.querySelector(".user__button_type_add");
 const editButton = document.querySelector(".user__button_type_edit");
 
-const closePopup = () => {
-  const popup = innerLayout.querySelector(".popup");
+const addPopup = document.querySelector(".popup_type_add-form");
+const addSubmitButton = addPopup.querySelector(".form__submit-button");
 
-  popup.classList.remove("popup_type_image", "popup_type_form", "popup_opened");
-  popup.querySelector(".close-button").parentElement.remove();
+const editPopup = document.querySelector(".popup_type_edit-form");
+const userNameInput = editPopup.querySelectorAll(".form__item")[0];
+const userDescriptionInput = editPopup.querySelectorAll(".form__item")[1];
+const editSubmitButton = editPopup.querySelector(".form__submit-button");
+
+const previewPopup = document.querySelector(".popup_type_preview-image");
+const closeButtons = document.querySelectorAll(".close-button");
+
+const openPopup = (popup) => popup.classList.add("popup_opened");
+
+const openAddPopup = () => {
+  openPopup(addPopup);
+
+  userNameInput.value = userName.textContent;
+  userDescriptionInput.value = userDescription.textContent;
 };
 
-const formSubmitHandler = (evt, type, ...inputValues) => {
-  evt.preventDefault();
+const closePopup = (evt) => {
+  const popupOpened = evt.target.closest(".popup_opened");
 
-  const [firstValue, secondValue] = inputValues;
-
-  if (type === "editForm") {
-    userName.textContent = firstValue;
-    userDescription.textContent = secondValue;
-  } else {
-    const newCard = addCard(firstValue, secondValue);
-    cards.prepend(newCard);
-  }
-
-  closePopup();
+  popupOpened.classList.remove("popup_opened");
 };
 
-const renderFrom = (type) => {
-  const { heading, firstField, secondField } = formFields[type];
+const handlePreviewImage = (evt) => {
+  openPopup(previewPopup);
 
-  const formWrapperTemplate = document.querySelector("#form-wrapper").content;
-  const formWrapper = formWrapperTemplate
-    .querySelector(".form-wrapper")
-    .cloneNode(true);
+  const image = previewPopup.querySelector(".preview-image__image");
+  const caption = previewPopup.querySelector(".preview-image__caption");
 
-  const [firstInput, secondInput] = formWrapper.querySelectorAll(".form__item");
-
-  firstInput.name = firstField.name;
-  firstInput.placeholder = firstField.placeholder;
-  secondInput.name = secondField.name;
-  secondInput.placeholder = secondField.placeholder;
-  formWrapper.querySelector(".form__heading").textContent = heading;
-
-  if (type === "editForm") {
-    firstInput.value = userName.textContent;
-    secondInput.value = userDescription.textContent;
-  }
-
-  const popup = innerLayout.querySelector(".popup");
-  popup.append(formWrapper);
-
-  const closeButton = popup.querySelector(".close-button");
-  const form = popup.querySelector(".form");
-
-  closeButton.addEventListener("click", closePopup);
-  form.addEventListener("submit", (evt) =>
-    formSubmitHandler(evt, type, firstInput.value, secondInput.value)
-  );
-};
-
-const renderImagePreview = (evt) => {
-  const imagePreviewWrapperTemplate = document.querySelector(
-    "#image-preview-wrapper"
-  ).content;
-  const imagePreviewWrapper = imagePreviewWrapperTemplate
-    .querySelector(".image-preview-wrapper")
-    .cloneNode(true);
-
-  const image = imagePreviewWrapper.querySelector(
-    ".image-preview-container__image"
-  );
-  const caption = imagePreviewWrapper.querySelector(
-    ".image-preview-container__caption"
-  );
   image.alt = evt.target.alt;
   image.src = evt.target.src;
   caption.textContent = evt.target.alt;
-
-  const popup = innerLayout.querySelector(".popup");
-  popup.append(imagePreviewWrapper);
-
-  const closeButton = popup.querySelector(".close-button");
-  closeButton.addEventListener("click", closePopup);
 };
 
-const openPopup = (type, evt) => {
-  const popup = innerLayout.querySelector(".popup");
-  popup.classList.add("popup_opened");
+const handleLikeButton = (evt) =>
+  evt.target.classList.toggle("card__button_type_like-active");
 
-  if (type === "imagePreview") {
-    popup.classList.add("popup_type_image");
-    renderImagePreview(evt);
-  } else {
-    popup.classList.add("popup_type_form");
-    renderFrom(type);
-  }
+const handleDeleteCard = (evt) => {
+  evt.target.closest(".card").remove();
 };
 
-const addCard = (name, link) => {
+const getCardElement = (name, link) => {
   const cardTemplate = document.querySelector("#card").content;
-  const card = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
-  card.querySelector(".card__title").textContent = name;
+  cardElement.querySelector(".card__title").textContent = name;
 
-  const image = card.querySelector(".card__image");
-  const likeButton = card.querySelector(".card__button_type_like");
-  const trashButton = card.querySelector(".card__button_type_trash");
+  const image = cardElement.querySelector(".card__image");
+  const likeButton = cardElement.querySelector(".card__button_type_like");
+  const trashButton = cardElement.querySelector(".card__button_type_trash");
 
   image.src = link;
   image.alt = name;
 
-  image.addEventListener("click", (evt) => openPopup("imagePreview", evt));
+  image.addEventListener("click", (evt) => handlePreviewImage(evt));
+  likeButton.addEventListener("click", (evt) => handleLikeButton(evt));
+  trashButton.addEventListener("click", (evt) => handleDeleteCard(evt));
 
-  likeButton.addEventListener("click", () =>
-    likeButton.classList.toggle("card__button_type_like-active")
-  );
-
-  trashButton.addEventListener("click", () =>
-    trashButton.parentElement.remove()
-  );
-
-  return card;
+  return cardElement;
 };
 
-const renderInitialCards = () => {
-  const сardsArray = initialCards.map(({ name, link }) => addCard(name, link));
+const handleAddSubmit = (evt) => {
+  evt.preventDefault();
+
+  const nameInput = addPopup.querySelectorAll(".form__item")[0];
+  const linkInput = addPopup.querySelectorAll(".form__item")[1];
+
+  const newCard = getCardElement(nameInput.value, linkInput.value);
+  cards.prepend(newCard);
+
+  closePopup(evt);
+
+  nameInput.value = "";
+  linkInput.value = "";
+};
+
+const handleEditSubmit = (evt) => {
+  evt.preventDefault();
+
+  userName.textContent = userNameInput.value;
+  userDescription.textContent = userDescriptionInput.value;
+
+  closePopup(evt);
+};
+
+const renderInitialCards = (arr) => {
+  const сardsArray = arr.map(({ name, link }) => getCardElement(name, link));
 
   cards.append(...сardsArray);
 };
 
-const renderPopup = () => {
-  const popupTemplate = document.querySelector("#popup").content;
-  const popup = popupTemplate.querySelector(".popup").cloneNode(true);
+renderInitialCards(initialCards);
 
-  innerLayout.append(popup);
-};
+addButton.addEventListener("click", openAddPopup);
+editButton.addEventListener("click", () => openPopup(editPopup));
 
-renderInitialCards();
-renderPopup();
-addButton.addEventListener("click", () => openPopup("addForm"));
-editButton.addEventListener("click", () => openPopup("editForm"));
+addSubmitButton.addEventListener("click", (evt) => handleAddSubmit(evt));
+editSubmitButton.addEventListener("click", (evt) => handleEditSubmit(evt));
+
+closeButtons.forEach((button) =>
+  button.addEventListener("click", (evt) => {
+    closePopup(evt);
+  })
+);
