@@ -12,8 +12,10 @@ const addPopup = document.querySelector(".popup_type_add-form");
 const addSubmitButton = addPopup.querySelector(".form__submit-button");
 
 const editPopup = document.querySelector(".popup_type_edit-form");
-const userNameInput = editPopup.querySelectorAll(".form__item")[0];
-const userDescriptionInput = editPopup.querySelectorAll(".form__item")[1];
+const userNameInput = editPopup.querySelector(".form__item_el_user-name");
+const userDescriptionInput = editPopup.querySelector(
+  ".form__item_el_description"
+);
 const editSubmitButton = editPopup.querySelector(".form__submit-button");
 
 const previewPopup = document.querySelector(".popup_type_preview-image");
@@ -21,8 +23,8 @@ const closeButtons = document.querySelectorAll(".close-button");
 
 const openPopup = (popup) => popup.classList.add("popup_opened");
 
-const openAddPopup = () => {
-  openPopup(addPopup);
+const openEditPopup = () => {
+  openPopup(editPopup);
 
   userNameInput.value = userName.textContent;
   userDescriptionInput.value = userDescription.textContent;
@@ -52,6 +54,29 @@ const handleDeleteCard = (evt) => {
   evt.target.closest(".card").remove();
 };
 
+const handleAddSubmit = (evt) => {
+  evt.preventDefault();
+
+  const nameInput = addPopup.querySelector(".form__item_el_place-name");
+  const linkInput = addPopup.querySelector(".form__item_el_link");
+
+  const newCard = getCardElement(nameInput.value, linkInput.value);
+  cards.prepend(newCard);
+
+  closePopup(evt);
+
+  addPopup.querySelector(".form").reset();
+};
+
+const handleEditSubmit = (evt) => {
+  evt.preventDefault();
+
+  userName.textContent = userNameInput.value;
+  userDescription.textContent = userDescriptionInput.value;
+
+  closePopup(evt);
+};
+
 const getCardElement = (name, link) => {
   const cardTemplate = document.querySelector("#card").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -72,30 +97,6 @@ const getCardElement = (name, link) => {
   return cardElement;
 };
 
-const handleAddSubmit = (evt) => {
-  evt.preventDefault();
-
-  const nameInput = addPopup.querySelectorAll(".form__item")[0];
-  const linkInput = addPopup.querySelectorAll(".form__item")[1];
-
-  const newCard = getCardElement(nameInput.value, linkInput.value);
-  cards.prepend(newCard);
-
-  closePopup(evt);
-
-  nameInput.value = "";
-  linkInput.value = "";
-};
-
-const handleEditSubmit = (evt) => {
-  evt.preventDefault();
-
-  userName.textContent = userNameInput.value;
-  userDescription.textContent = userDescriptionInput.value;
-
-  closePopup(evt);
-};
-
 const renderInitialCards = (arr) => {
   const сardsArray = arr.map(({ name, link }) => getCardElement(name, link));
 
@@ -104,8 +105,8 @@ const renderInitialCards = (arr) => {
 
 renderInitialCards(initialCards);
 
-addButton.addEventListener("click", openAddPopup);
-editButton.addEventListener("click", () => openPopup(editPopup));
+addButton.addEventListener("click", () => openPopup(addPopup));
+editButton.addEventListener("click", openEditPopup);
 
 addSubmitButton.addEventListener("click", (evt) => handleAddSubmit(evt));
 editSubmitButton.addEventListener("click", (evt) => handleEditSubmit(evt));
