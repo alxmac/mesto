@@ -90,9 +90,9 @@ const getCardElement = (name, link) => {
   image.src = link;
   image.alt = name;
 
-  image.addEventListener("click", (evt) => handlePreviewImage(evt));
-  likeButton.addEventListener("click", (evt) => handleLikeButton(evt));
-  trashButton.addEventListener("click", (evt) => handleDeleteCard(evt));
+  image.addEventListener("click", handlePreviewImage);
+  likeButton.addEventListener("click", handleLikeButton);
+  trashButton.addEventListener("click", handleDeleteCard);
 
   return cardElement;
 };
@@ -108,8 +108,8 @@ renderInitialCards(initialCards);
 addButton.addEventListener("click", () => openPopup(addPopup));
 editButton.addEventListener("click", openEditPopup);
 
-addSubmitButton.addEventListener("click", (evt) => handleAddSubmit(evt));
-editSubmitButton.addEventListener("click", (evt) => handleEditSubmit(evt));
+addSubmitButton.addEventListener("click", handleAddSubmit);
+editSubmitButton.addEventListener("click", handleEditSubmit);
 
 closeButtons.forEach((button) =>
   button.addEventListener("click", (evt) => {
