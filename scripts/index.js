@@ -111,8 +111,4 @@ editButton.addEventListener("click", openEditPopup);
 addSubmitButton.addEventListener("click", handleAddSubmit);
 editSubmitButton.addEventListener("click", handleEditSubmit);
 
-closeButtons.forEach((button) =>
-  button.addEventListener("click", (evt) => {
-    closePopup(evt);
-  })
-);
+closeButtons.forEach((button) => button.addEventListener("click", closePopup));
