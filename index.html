@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
     <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/validate.js"></script>
     <title>Mesto</title>
   </head>
   <body class="body">
@@ -57,7 +58,7 @@
       <!-- Попап редактирования информации о пользователе -->
       <section class="popup inner-layout__popup popup_type_edit-form">
         <div class="popup__container">
-          <form name="form" class="form">
+          <form name="edit" novalidate class="form">
             <h3 class="form__heading">Редактировать профиль</h3>
             <fieldset class="form__input-container">
               <input
@@ -87,7 +88,7 @@
       <!-- Попап добавления новой карточки -->
       <section class="popup inner-layout__popup popup_type_add-form">
         <div class="popup__container">
-          <form name="form" class="form">
+          <form name="add" novalidate class="form">
             <h3 class="form__heading">Новое место</h3>
             <fieldset class="form__input-container">
               <input
