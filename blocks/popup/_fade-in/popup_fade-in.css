@@ -1,0 +1,7 @@
+.popup_fade-in {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transition: opacity 0.5s linear;
+  -o-transition: opacity 0.5s linear;
+  transition: opacity 0.5s linear;
+}

@@ -19,7 +19,7 @@ const userDescriptionInput = editPopup.querySelector(
   ".form__item_el_description"
 );
 
-const openPopup = (popup) => popup.classList.add("popup_opened");
+const openPopup = (popup) => popup.classList.add("popup_fade-in");
 
 const openEditPopup = () => {
   openPopup(editPopup);
@@ -29,9 +29,10 @@ const openEditPopup = () => {
 };
 
 const closePopup = (target) => {
-  const popupOpened = target.closest(".popup_opened");
+  const popupOpened = target.closest(".popup_fade-in");
 
-  popupOpened.classList.remove("popup_opened");
+  popupOpened.classList.remove("popup_fade-in");
+  popupOpened.classList.add("popup_fade-out");
 };
 
 const handleAddSubmit = (evt) => {
@@ -97,13 +98,15 @@ addSubmitButton.addEventListener("click", handleAddSubmit);
 editSubmitButton.addEventListener("click", handleEditSubmit);
 
 innerLayout.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("close-button")) {
+  if (
+    evt.target.classList.contains("popup") ||
+    evt.target.classList.contains("close-button")
+  ) {
     closePopup(evt.target);
   }
 });
 
 cards.addEventListener("click", (evt) => {
-  console.log(evt.currentTarget);
   if (evt.target.classList.contains("card__image")) {
     handlePreviewImage(evt.target);
   }
