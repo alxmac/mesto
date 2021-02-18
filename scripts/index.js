@@ -19,7 +19,17 @@ const userDescriptionInput = editPopup.querySelector(
   ".form__item_el_description"
 );
 
-const openPopup = (popup) => popup.classList.add("popup_fade-in");
+const handleEscButton = (evt) => {
+  if (evt.key === "Escape") {
+    closePopup();
+  }
+};
+
+const openPopup = (popup) => {
+  popup.classList.add("popup_fade-in");
+
+  document.addEventListener("keydown", handleEscButton);
+};
 
 const openEditPopup = () => {
   openPopup(editPopup);
@@ -28,11 +38,13 @@ const openEditPopup = () => {
   userDescriptionInput.value = userDescription.textContent;
 };
 
-const closePopup = (target) => {
-  const popupOpened = target.closest(".popup_fade-in");
+const closePopup = () => {
+  const popupOpened = document.querySelector(".popup_fade-in");
 
   popupOpened.classList.remove("popup_fade-in");
   popupOpened.classList.add("popup_fade-out");
+
+  document.removeEventListener("keydown", handleEscButton);
 };
 
 const handleAddSubmit = (evt) => {
@@ -44,7 +56,7 @@ const handleAddSubmit = (evt) => {
   const newCard = getCardElement(nameInput.value, linkInput.value);
   cards.prepend(newCard);
 
-  closePopup(evt.target);
+  closePopup();
   addPopup.querySelector(".form").reset();
 };
 
@@ -54,7 +66,7 @@ const handleEditSubmit = (evt) => {
   userName.textContent = userNameInput.value;
   userDescription.textContent = userDescriptionInput.value;
 
-  closePopup(evt.target);
+  closePopup();
 };
 
 const handlePreviewImage = (target) => {
@@ -102,7 +114,7 @@ innerLayout.addEventListener("click", (evt) => {
     evt.target.classList.contains("popup") ||
     evt.target.classList.contains("close-button")
   ) {
-    closePopup(evt.target);
+    closePopup();
   }
 });
 
