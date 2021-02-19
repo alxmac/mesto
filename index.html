@@ -60,22 +60,34 @@
         <div class="popup__container">
           <form name="edit" novalidate class="form">
             <h3 class="form__heading">Редактировать профиль</h3>
-            <fieldset class="form__input-container">
+            <label class="form__field">
               <input
-                type="text"
+                required
+                id="user-name-input"
                 name="name"
-                required
-                placeholder="Имя"
-                class="form__item form__item_el_user-name"
-              />
-              <input
                 type="text"
-                name="description"
-                required
-                placeholder="О себе"
-                class="form__item form__item_el_description"
+                autocomplete="off"
+                minlength="2"
+                maxlength="40"
+                placeholder="Имя"
+                class="form__input form__input_el_user-name"
               />
-            </fieldset>
+              <span class="user-name-input-error form__input-error"></span>
+            </label>
+            <label class="form__field">
+              <input
+                required
+                id="description-input"
+                name="description"
+                type="text"
+                autocomplete="off"
+                minlength="2"
+                maxlength="200"
+                placeholder="О себе"
+                class="form__input form__input_el_description"
+              />
+              <span class="description-input-error form__input-error"></span>
+            </label>
             <input class="form__submit-button" type="submit" />
           </form>
           <button
@@ -90,22 +102,32 @@
         <div class="popup__container">
           <form name="add" novalidate class="form">
             <h3 class="form__heading">Новое место</h3>
-            <fieldset class="form__input-container">
+            <label class="form__field">
               <input
-                type="text"
+                required
+                id="place-name-input"
                 name="name"
-                required
-                placeholder="Название"
-                class="form__item form__item_el_place-name"
-              />
-              <input
                 type="text"
-                name="link"
-                required
-                placeholder="Ссылка на картинку"
-                class="form__item form__item_el_link"
+                autocomplete="off"
+                minlength="2"
+                maxlength="30"
+                placeholder="Название"
+                class="form__input form__input_el_place-name"
               />
-            </fieldset>
+              <span class="place-name-input-error form__input-error"></span>
+            </label>
+            <label class="form__field">
+              <input
+                required
+                id="link-input"
+                name="link"
+                type="url"
+                autocomplete="off"
+                placeholder="Ссылка на картинку"
+                class="form__input form__input_el_link"
+              />
+              <span class="link-input-error form__input-error"></span>
+            </label>
             <input class="form__submit-button" type="submit" />
           </form>
           <button

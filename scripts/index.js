@@ -14,9 +14,9 @@ const previewPopup = document.querySelector(".popup_type_preview-image");
 
 const addSubmitButton = addPopup.querySelector(".form__submit-button");
 const editSubmitButton = editPopup.querySelector(".form__submit-button");
-const userNameInput = editPopup.querySelector(".form__item_el_user-name");
+const userNameInput = editPopup.querySelector(".form__input_el_user-name");
 const userDescriptionInput = editPopup.querySelector(
-  ".form__item_el_description"
+  ".form__input_el_description"
 );
 
 const handleEscButton = (evt) => {
@@ -44,14 +44,19 @@ const closePopup = () => {
   popupOpened.classList.remove("popup_fade-in");
   popupOpened.classList.add("popup_fade-out");
 
+  if (
+    popupOpened.classList.contains("popup_type_add-form") ||
+    popupOpened.classList.contains("popup_type_edit-form")
+  ) {
+    popupOpened.querySelector(".form").reset();
+  }
+
   document.removeEventListener("keydown", handleEscButton);
 };
 
-const handleAddSubmit = (evt) => {
-  evt.preventDefault();
-
-  const nameInput = addPopup.querySelector(".form__item_el_place-name");
-  const linkInput = addPopup.querySelector(".form__item_el_link");
+const handleAddSubmit = () => {
+  const nameInput = addPopup.querySelector(".form__input_el_place-name");
+  const linkInput = addPopup.querySelector(".form__input_el_link");
 
   const newCard = getCardElement(nameInput.value, linkInput.value);
   cards.prepend(newCard);
@@ -60,9 +65,7 @@ const handleAddSubmit = (evt) => {
   addPopup.querySelector(".form").reset();
 };
 
-const handleEditSubmit = (evt) => {
-  evt.preventDefault();
-
+const handleEditSubmit = () => {
   userName.textContent = userNameInput.value;
   userDescription.textContent = userDescriptionInput.value;
 
