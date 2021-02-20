@@ -1,4 +1,4 @@
-import { initialCards } from "../configs/index.js";
+import { initialCards } from "../configs";
 
 const innerLayout = document.querySelector(".inner-layout");
 const cards = document.querySelector(".cards");
@@ -18,6 +18,8 @@ const userNameInput = editPopup.querySelector(".form__input_el_user-name");
 const userDescriptionInput = editPopup.querySelector(
   ".form__input_el_description"
 );
+
+const resetFormFields = (formElement) => formElement.reset();
 
 const handleEscButton = (evt) => {
   if (evt.key === "Escape") {
@@ -44,14 +46,14 @@ const closePopup = () => {
   popupOpened.classList.remove("popup_fade-in");
   popupOpened.classList.add("popup_fade-out");
 
+  document.removeEventListener("keydown", handleEscButton);
+
   if (
     popupOpened.classList.contains("popup_type_add-form") ||
     popupOpened.classList.contains("popup_type_edit-form")
   ) {
-    popupOpened.querySelector(".form").reset();
+    resetFormFields(popupOpened.querySelector(".form"));
   }
-
-  document.removeEventListener("keydown", handleEscButton);
 };
 
 const handleAddSubmit = () => {
@@ -62,7 +64,6 @@ const handleAddSubmit = () => {
   cards.prepend(newCard);
 
   closePopup();
-  addPopup.querySelector(".form").reset();
 };
 
 const handleEditSubmit = () => {

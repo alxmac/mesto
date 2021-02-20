@@ -1,3 +1,5 @@
+import { validationSettings } from "../configs";
+
 const showInputError = (
   formElement,
   inputElement,
@@ -5,7 +7,6 @@ const showInputError = (
   inputErrorClass,
   errorClass
 ) => {
-  // Находим элемент ошибки
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
   inputElement.classList.add(inputErrorClass);
@@ -19,7 +20,6 @@ const hideInputError = (
   inputErrorClass,
   errorClass
 ) => {
-  // Находим элемент ошибки
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
   inputElement.classList.remove(inputErrorClass);
@@ -53,21 +53,54 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   }
 };
 
+const hideErrors = (formElement, inputErrorClass, errorClass) => {
+  const inputErrorList = Array.from(
+    formElement.querySelectorAll(`.${inputErrorClass}`)
+  );
+  const errorElementList = Array.from(
+    formElement.querySelectorAll(`.${errorClass}`)
+  );
+
+  inputErrorList.forEach((inputError) =>
+    inputError.classList.remove(inputErrorClass)
+  );
+  errorElementList.forEach((errorElement) =>
+    errorElement.classList.remove(errorClass)
+  );
+};
+
 const setEventListeners = (
   formElement,
   inputSelector,
   submitButtonSelector,
+  openFormButtonSelector,
   inputErrorClass,
   errorClass,
   inactiveButtonClass
 ) => {
-  // Находим все поля внутри формы
+  // Все поля внутри формы
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-  // Находим кнопку отправки
+  // Все кнопки открытия попапа с формой
+  const openFormButtonList = Array.from(
+    document.querySelectorAll(openFormButtonSelector)
+  );
+  // Кнопка отправки формы
   const buttonElement = formElement.querySelector(submitButtonSelector);
 
-  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-  
+  formElement.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+  });
+
+  formElement.addEventListener("reset", () => {
+    hideErrors(formElement, inputErrorClass, errorClass);
+  });
+
+  openFormButtonList.forEach((openButtonElement) => {
+    openButtonElement.addEventListener("click", () =>
+      toggleButtonState(inputList, buttonElement, inactiveButtonClass)
+    );
+  });
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       isValid(formElement, inputElement, inputErrorClass, errorClass);
@@ -80,23 +113,20 @@ const setEventListeners = (
 const enableValidation = ({
   formSelector,
   inputSelector,
+  openFormButtonSelector,
   submitButtonSelector,
   inputErrorClass,
   errorClass,
   inactiveButtonClass,
 }) => {
-  // Находим все формы
   const formList = Array.from(document.querySelectorAll(formSelector));
 
   formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-
     setEventListeners(
       formElement,
       inputSelector,
       submitButtonSelector,
+      openFormButtonSelector,
       inputErrorClass,
       errorClass,
       inactiveButtonClass
@@ -104,11 +134,4 @@ const enableValidation = ({
   });
 };
 
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit-button",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__input-error_active",
-  inactiveButtonClass: "form__submit-button_disabled",
-});
+enableValidation(validationSettings);
