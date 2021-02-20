@@ -1,4 +1,4 @@
-import { initialCards } from "../configs";
+import { initialCards } from "../configs/index.js";
 
 const innerLayout = document.querySelector(".inner-layout");
 const cards = document.querySelector(".cards");
