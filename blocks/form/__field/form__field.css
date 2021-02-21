@@ -8,3 +8,13 @@
 .form__field:last-of-type {
   margin-bottom: 48px;
 }
+
+@media screen and (max-width: 550px) {
+  .form__field {
+    margin-bottom: 55px;
+  }
+
+  .form__field:last-of-type {
+    margin-bottom: 55px;
+  }
+}
