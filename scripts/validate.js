@@ -1,4 +1,4 @@
-import { validationSettings } from "../configs/index.js";
+import { validationSettings } from "../utils/constants.js";
 
 const showInputError = (
   formElement,
