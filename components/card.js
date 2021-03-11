@@ -16,7 +16,7 @@ export class Card {
     return cardElement;
   }
 
-  _getPopupElements() {
+  _getPreviewElements() {
     const previewPopup = document.querySelector(".popup_type_preview-image");
     const previewImage = previewPopup.querySelector(".preview-image__image");
     const imageCaption = previewPopup.querySelector(".preview-image__caption");
@@ -55,14 +55,9 @@ export class Card {
   }
 
   _handlePreviewImage(target) {
-    const {
-      previewPopup,
-      previewImage,
-      imageCaption,
-    } = this._getPopupElements();
-
     this._openPreviewPopup();
 
+    const { previewImage, imageCaption } = this._getPreviewElements();
     previewImage.alt = target.alt;
     previewImage.src = target.src;
     imageCaption.textContent = target.alt;
@@ -77,13 +72,13 @@ export class Card {
   }
 
   _openPreviewPopup() {
-    const { previewPopup } = this._getPopupElements();
+    const { previewPopup } = this._getPreviewElements();
 
     previewPopup.classList.add("popup_fade-in");
   }
 
   _closePreviewPopup() {
-    const { previewPopup } = this._getPopupElements();
+    const { previewPopup } = this._getPreviewElements();
 
     previewPopup.classList.remove("popup_fade-in");
     previewPopup.classList.add("popup_fade-out");
