@@ -1,5 +1,6 @@
 import { Card } from "../components/card.js";
-import { initialCards } from "../utils/constants.js";
+import { FormValidator } from "../components/formValidator.js";
+import { initialCards, validationSettings } from "../utils/constants.js";
 
 const innerLayout = document.querySelector(".inner-layout");
 const cards = document.querySelector(".cards");
@@ -21,6 +22,8 @@ const userNameInput = editPopup.querySelector(".form__input_el_user-name");
 const userDescriptionInput = editPopup.querySelector(
   ".form__input_el_description"
 );
+
+const formList = Array.from(document.querySelectorAll(".form"));
 
 const handleEscButton = (evt) => {
   if (evt.key === "Escape") {
@@ -100,6 +103,12 @@ innerLayout.addEventListener("click", (evt) => {
   ) {
     closePopup();
   }
+});
+
+formList.forEach((formElement) => {
+  const validator = new FormValidator(validationSettings, formElement);
+
+  validator.enableValidation();
 });
 
 renderInitialCards(initialCards);
