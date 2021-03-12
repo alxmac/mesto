@@ -12,6 +12,7 @@ const editButton = document.querySelector(".user__button_type_edit");
 
 const addPopup = document.querySelector(".popup_type_add-form");
 const editPopup = document.querySelector(".popup_type_edit-form");
+const previewPopup = document.querySelector(".popup_type_preview-image");
 
 const addSubmitButton = addPopup.querySelector(".form__submit-button");
 const nameInput = addPopup.querySelector(".form__input_el_place-name");
@@ -23,12 +24,17 @@ const userDescriptionInput = editPopup.querySelector(
   ".form__input_el_description"
 );
 
+const previewImage = previewPopup.querySelector(".preview-image__image");
+const previewImageCaption = previewPopup.querySelector(
+  ".preview-image__caption"
+);
+
 const formList = Array.from(document.querySelectorAll(".form"));
 const addForm = addPopup.querySelector(".form");
 const editForm = editPopup.querySelector(".form");
 
 const createCard = (data) => {
-  const card = new Card(data, "#card");
+  const card = new Card(data, "#card", handleCardClick);
   const cardElement = card.generateCard();
 
   return cardElement;
@@ -91,6 +97,13 @@ const handleEditSubmit = () => {
   userDescription.textContent = userDescriptionInput.value;
 
   closePopup();
+};
+
+const handleCardClick = (name, link) => {
+  openPopup(previewPopup);
+  
+  previewImage.src = link;
+  previewImageCaption.textContent = name;
 };
 
 addButton.addEventListener("click", openAddForm);

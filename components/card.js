@@ -1,10 +1,9 @@
 export class Card {
-  constructor(data, cardSelector) {
-    this._cardSelector = cardSelector;
+  constructor(data, cardSelector, handleCardClick) {
     this._link = data.link;
     this._name = data.name;
-
-    this._handleEscButton = this._handleEscButton.bind(this);
+    this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -16,87 +15,45 @@ export class Card {
     return cardElement;
   }
 
-  _getPreviewElements() {
-    const previewPopup = document.querySelector(".popup_type_preview-image");
-    const previewImage = previewPopup.querySelector(".preview-image__image");
-    const imageCaption = previewPopup.querySelector(".preview-image__caption");
-
-    return { previewPopup, previewImage, imageCaption };
-  }
-
   _setEventListeners() {
-    this._element
+    this._cardElement
       .querySelector(".card__button_type_trash")
       .addEventListener("click", () => {
         this._handleDeleteCard();
       });
 
-    this._element
-      .querySelector(".card__button_type_like")
-      .addEventListener("click", () => {
-        this._handleLikeButton();
-      });
+    this._cardImage.addEventListener("click", () => {
+      this._handleCardClick(this._name, this._link);
+    });
 
-    this._element
-      .querySelector(".card__image")
-      .addEventListener("click", ({ target }) => {
-        this._handlePreviewImage(target);
-      });
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeButton();
+    });
   }
 
   _handleDeleteCard() {
-    this._element.remove();
-    this._element = null;
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 
   _handleLikeButton() {
-    this._element
-      .querySelector(".card__button_type_like")
-      .classList.toggle("card__button_type_like-active");
-  }
-
-  _handlePreviewImage(target) {
-    this._openPreviewPopup();
-
-    const { previewImage, imageCaption } = this._getPreviewElements();
-    previewImage.alt = target.alt;
-    previewImage.src = target.src;
-    imageCaption.textContent = target.alt;
-
-    document.addEventListener("keydown", this._handleEscButton);
-  }
-
-  _handleEscButton(evt) {
-    if (evt.key === "Escape") {
-      this._closePreviewPopup();
-    }
-  }
-
-  _openPreviewPopup() {
-    const { previewPopup } = this._getPreviewElements();
-
-    previewPopup.classList.add("popup_fade-in");
-  }
-
-  _closePreviewPopup() {
-    const { previewPopup } = this._getPreviewElements();
-
-    previewPopup.classList.remove("popup_fade-in");
-    previewPopup.classList.add("popup_fade-out");
-
-    document.removeEventListener("keydown", this._handleEscButton);
+    this._likeButton.classList.toggle("card__button_type_like-active");
   }
 
   generateCard() {
-    this._element = this._getTemplate();
+    this._cardElement = this._getTemplate();
+
+    this._likeButton = this._cardElement.querySelector(
+      ".card__button_type_like"
+    );
+    this._cardImage = this._cardElement.querySelector(".card__image");
+
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardElement.querySelector(".card__title").textContent = this._name;
+
     this._setEventListeners();
 
-    const image = this._element.querySelector(".card__image");
-    image.src = this._link;
-    image.alt = this._name;
-
-    this._element.querySelector(".card__title").textContent = this._name;
-
-    return this._element;
+    return this._cardElement;
   }
 }
