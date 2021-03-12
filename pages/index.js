@@ -24,11 +24,22 @@ const userDescriptionInput = editPopup.querySelector(
 );
 
 const formList = Array.from(document.querySelectorAll(".form"));
+const addForm = addPopup.querySelector(".form");
+const editForm = editPopup.querySelector(".form");
 
-const handleEscButton = (evt) => {
-  if (evt.key === "Escape") {
-    closePopup();
-  }
+const createCard = (data) => {
+  const card = new Card(data, "#card");
+  const cardElement = card.generateCard();
+
+  return cardElement;
+};
+
+const renderInitialCards = (arr) => {
+  arr.map((data) => {
+    const cardElement = createCard(data);
+
+    cards.append(cardElement);
+  });
 };
 
 const openPopup = (popup) => {
@@ -39,12 +50,12 @@ const openPopup = (popup) => {
 
 const openAddForm = () => {
   openPopup(addPopup);
-  addPopup.querySelector(".form").reset();
+  addForm.reset();
 };
 
 const openEditForm = () => {
   openPopup(editPopup);
-  editPopup.querySelector(".form").reset();
+  editForm.reset();
 
   userNameInput.value = userName.textContent;
   userDescriptionInput.value = userDescription.textContent;
@@ -59,18 +70,19 @@ const closePopup = () => {
   document.removeEventListener("keydown", handleEscButton);
 };
 
+const handleEscButton = (evt) => {
+  if (evt.key === "Escape") {
+    closePopup();
+  }
+};
+
 const handleAddSubmit = () => {
-  const card = new Card(
-    {
-      name: nameInput.value,
-      link: linkInput.value,
-    },
-    "#card"
-  );
+  const cardElement = createCard({
+    name: nameInput.value,
+    link: linkInput.value,
+  });
 
-  const cardElement = card.generateCard();
   cards.prepend(cardElement);
-
   closePopup();
 };
 
@@ -79,15 +91,6 @@ const handleEditSubmit = () => {
   userDescription.textContent = userDescriptionInput.value;
 
   closePopup();
-};
-
-const renderInitialCards = (arr) => {
-  arr.map((data) => {
-    const card = new Card(data, "#card");
-    const cardElement = card.generateCard();
-
-    cards.append(cardElement);
-  });
 };
 
 addButton.addEventListener("click", openAddForm);
