@@ -1,5 +1,5 @@
-import { Card } from "../components/card.js";
-import { FormValidator } from "../components/formValidator.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
 import { initialCards, validationSettings } from "../utils/constants.js";
 
 const innerLayout = document.querySelector(".inner-layout");
@@ -101,7 +101,7 @@ const handleEditSubmit = () => {
 
 const handleCardClick = (name, link) => {
   openPopup(previewPopup);
-  
+
   previewImage.src = link;
   previewImageCaption.textContent = name;
 };
