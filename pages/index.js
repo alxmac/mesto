@@ -1,5 +1,7 @@
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
+import { Popup } from "../components/Popup.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 import { initialCards, validationSettings } from "../utils/constants.js";
 
 const innerLayout = document.querySelector(".inner-layout");
