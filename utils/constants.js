@@ -38,3 +38,5 @@ export const validationSettings = {
   errorClass: "form__input-error_active",
   inactiveButtonClass: "form__submit-button_disabled",
 };
+
+export const formList = Array.from(document.querySelectorAll(".form"));

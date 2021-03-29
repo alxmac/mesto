@@ -25,8 +25,13 @@ export class Popup {
   }
 
   setEventListeners() {
-    const closeBtn = this._popup.querySelector(".close-button");
-
-    closeBtn.addEventListener("click", this.close);
+    this._popup.addEventListener("click", (evt) => {
+      if (
+        evt.target.classList.contains("popup") ||
+        evt.target.classList.contains("close-button")
+      ) {
+        this.close();
+      }
+    });
   }
 }
