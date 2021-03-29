@@ -4,8 +4,6 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._link = link;
     this._name = name;
-    
-    
   }
 
   _getTemplate() {
@@ -49,7 +47,7 @@ export class Card {
     this._likeButton = this._cardElement.querySelector(
       ".card__button_type_like"
     );
-    
+
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;

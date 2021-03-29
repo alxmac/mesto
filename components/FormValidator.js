@@ -84,10 +84,6 @@ export class FormValidator {
     // Кнопка отправки формы
     this._submitButton = this._formElement.querySelector(submitButtonSelector);
 
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-
     this._formElement.addEventListener("reset", () => {
       this._hideErrors();
     });
