@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto</title>
   </head>
   <body class="body">
@@ -12,7 +11,7 @@
       <header class="header inner-layout__header">
         <a href="/mesto" target="_self" class="header__logo">
           <img
-            src="./images/header-logo.svg"
+            src="<%=require('./images/header-logo.svg')%>"
             alt="Логотип"
             class="header__image"
           />
@@ -24,7 +23,7 @@
         <!-- Секция user -->
         <section class="user">
           <img
-            src="./images/user-avatar.jpg"
+            src="<%=require('./images/user-avatar.jpg')%>"
             alt="Аватар"
             class="user__avatar"
           />
@@ -168,7 +167,5 @@
         ></button>
       </div>
     </template>
-
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
