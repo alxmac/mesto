@@ -88,6 +88,12 @@ export class FormValidator {
       this._hideErrors();
     });
 
+    this._formElement.addEventListener("keydown", (evt) => {
+      if (this._hasInvalidInput() && evt.key === "Enter") {
+        evt.preventDefault();
+      }
+    });
+
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._isValid(inputElement);
