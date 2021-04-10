@@ -63,13 +63,6 @@ api
   })
   .catch((err) => handleError(err));
 
-const createCard = (data) => {
-  const card = new Card(data, "#card", handleCardClick);
-  const cardElement = card.generateCard();
-
-  return cardElement;
-};
-
 const addPopup = new PopupWithForm(addPopupSelector, (data) => {
   api
     .addCard(data)
@@ -93,6 +86,13 @@ const editPopup = new PopupWithForm(editPopupSelector, (data) => {
 });
 
 const previewPopup = new PopupWithImage(previewPopupSelector);
+
+const createCard = (data) => {
+  const card = new Card(data, "#card", handleCardClick);
+  const cardElement = card.generateCard();
+
+  return cardElement;
+};
 
 const handleCardClick = (caption, link) => {
   previewPopup.open({ caption, link });
