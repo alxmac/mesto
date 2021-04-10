@@ -44,9 +44,7 @@ api
   .then((data) => {
     userUnfo.setUserInfo(data);
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err) => handleError(err));
 
 const cardsList = new Section(
   {
@@ -63,9 +61,7 @@ api
   .then((data) => {
     cardsList.renderItems(data);
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err) => handleError(err));
 
 const createCard = (data) => {
   const card = new Card(data, "#card", handleCardClick);
@@ -75,14 +71,24 @@ const createCard = (data) => {
 };
 
 const addPopup = new PopupWithForm(addPopupSelector, (data) => {
-  const cardElement = createCard(data);
+  api
+    .addCard(data)
+    .then((data) => {
+      cardsList.addItem(createCard(data), "prepend");
+    })
+    .catch((err) => handleError(err));
 
-  cardsList.addItem(cardElement, "prepend");
   addPopup.close();
 });
 
 const editPopup = new PopupWithForm(editPopupSelector, (data) => {
-  userUnfo.setUserInfo(data);
+  api
+    .editUserInfo(data)
+    .then((data) => {
+      userUnfo.setUserInfo(data);
+    })
+    .catch((err) => handleError(err));
+
   editPopup.close();
 });
 
@@ -91,6 +97,8 @@ const previewPopup = new PopupWithImage(previewPopupSelector);
 const handleCardClick = (caption, link) => {
   previewPopup.open({ caption, link });
 };
+
+const handleError = (err) => console.log(err);
 
 const openAddForm = () => {
   addPopup.open();
