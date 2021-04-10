@@ -3,6 +3,7 @@ export const selectors = {
   nameSelector: ".user__name",
   descriptionSelector: ".user__description",
   addPopupSelector: ".popup_type_add-form",
+  confirmationPopupSelector: ".popup_type_confirmation",
   editPopupSelector: ".popup_type_edit-form",
   previewPopupSelector: ".popup_type_preview-image",
 };

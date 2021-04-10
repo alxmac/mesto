@@ -2,6 +2,7 @@ import "./pages/index.css";
 import { Api } from "./components/Api.js";
 import { Card } from "./components/Card.js";
 import { FormValidator } from "./components/FormValidator.js";
+import { PopupWithConfirmation } from "./components/PopupWithConfirmation.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
 import { PopupWithForm } from "./components/PopupWithForm.js";
 import { Section } from "./components/Section.js";
@@ -19,6 +20,7 @@ import {
 const {
   addPopupSelector,
   avatarSelector,
+  confirmationPopupSelector,
   descriptionSelector,
   editPopupSelector,
   nameSelector,
@@ -61,7 +63,7 @@ api
   .then((data) => {
     cardsList.renderItems(data);
   })
-  .catch((err) => handleError(err));
+  .catch((err) => console.log(err));
 
 const addPopup = new PopupWithForm(addPopupSelector, (data) => {
   api
@@ -69,10 +71,23 @@ const addPopup = new PopupWithForm(addPopupSelector, (data) => {
     .then((data) => {
       cardsList.addItem(createCard(data), "prepend");
     })
-    .catch((err) => handleError(err));
-
-  addPopup.close();
+    .catch((err) => console.log(err))
+    .finally(() => addPopup.close());
 });
+
+const confirmationPopup = new PopupWithConfirmation(
+  confirmationPopupSelector,
+  (card, cardId) => {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        card.remove();
+        card = null;
+      })
+      .catch((err) => console.log(err))
+      .finally(() => confirmationPopup.close());
+  }
+);
 
 const editPopup = new PopupWithForm(editPopupSelector, (data) => {
   api
@@ -80,29 +95,25 @@ const editPopup = new PopupWithForm(editPopupSelector, (data) => {
     .then((data) => {
       userUnfo.setUserInfo(data);
     })
-    .catch((err) => handleError(err));
-
-  editPopup.close();
+    .catch((err) => console.log(err))
+    .finally(() => editPopup.close());
 });
 
 const previewPopup = new PopupWithImage(previewPopupSelector);
 
 const createCard = (data) => {
-  const card = new Card(data, "#card", handleCardClick);
+  const card = new Card(data, "#card", handleCardClick, handleCardDeleteClick);
   const cardElement = card.generateCard();
 
   return cardElement;
 };
 
-const handleCardClick = (caption, link) => {
-  previewPopup.open({ caption, link });
-};
+const handleCardClick = (caption, link) => previewPopup.open({ caption, link });
 
-const handleError = (err) => console.log(err);
+const handleCardDeleteClick = (card, cardId) =>
+  confirmationPopup.open(card, cardId);
 
-const openAddForm = () => {
-  addPopup.open();
-};
+const openAddForm = () => addPopup.open();
 
 const openEditForm = () => {
   const { name, description } = userUnfo.getUserInfo();
@@ -117,6 +128,8 @@ addButton.addEventListener("click", openAddForm);
 editButton.addEventListener("click", openEditForm);
 
 formList.forEach((formElement) => {
+  if (formElement.id === "confirm") return;
+
   const validator = new FormValidator(validationSettings, formElement);
 
   validator.enableValidation();
