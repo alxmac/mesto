@@ -32,6 +32,7 @@ export const initialCards = [
 ];
 
 export const selectors = {
+  avatarSelector: ".user__avatar",
   nameSelector: ".user__name",
   descriptionSelector: ".user__description",
   addPopupSelector: ".popup_type_add-form",

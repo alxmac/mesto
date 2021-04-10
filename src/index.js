@@ -1,4 +1,5 @@
 import "./pages/index.css";
+import { Api } from "./components/Api.js";
 import { Card } from "./components/Card.js";
 import { FormValidator } from "./components/FormValidator.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
@@ -18,16 +19,35 @@ import {
 
 const {
   addPopupSelector,
+  avatarSelector,
   descriptionSelector,
   editPopupSelector,
   nameSelector,
   previewPopupSelector,
 } = selectors;
 
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-22",
+  headers: {
+    authorization: "b840dc47-080d-4028-b958-7f9f9e1effeb",
+    "Content-Type": "application/json",
+  },
+});
+
 const userUnfo = new UserInfo({
   nameSelector,
   descriptionSelector,
+  avatarSelector,
 });
+
+api
+  .getUserInfo()
+  .then((result) => {
+    userUnfo.setUserInfo(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const cardsList = new Section(
   {
