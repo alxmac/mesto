@@ -10,7 +10,6 @@ import {
   addButton,
   editButton,
   formList,
-  initialCards,
   selectors,
   validationSettings,
   userNameInput,
@@ -42,8 +41,8 @@ const userUnfo = new UserInfo({
 
 api
   .getUserInfo()
-  .then((result) => {
-    userUnfo.setUserInfo(result);
+  .then((data) => {
+    userUnfo.setUserInfo(data);
   })
   .catch((err) => {
     console.log(err);
@@ -51,7 +50,6 @@ api
 
 const cardsList = new Section(
   {
-    items: initialCards,
     renderer: (data) => {
       const cardElement = createCard(data);
       cardsList.addItem(cardElement);
@@ -59,6 +57,22 @@ const cardsList = new Section(
   },
   ".cards"
 );
+
+api
+  .getInitialCards()
+  .then((data) => {
+    cardsList.renderItems(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+const createCard = (data) => {
+  const card = new Card(data, "#card", handleCardClick);
+  const cardElement = card.generateCard();
+
+  return cardElement;
+};
 
 const addPopup = new PopupWithForm(addPopupSelector, (data) => {
   const cardElement = createCard(data);
@@ -73,13 +87,6 @@ const editPopup = new PopupWithForm(editPopupSelector, (data) => {
 });
 
 const previewPopup = new PopupWithImage(previewPopupSelector);
-
-const createCard = (data) => {
-  const card = new Card(data, "#card", handleCardClick);
-  const cardElement = card.generateCard();
-
-  return cardElement;
-};
 
 const handleCardClick = (caption, link) => {
   previewPopup.open({ caption, link });
@@ -97,8 +104,6 @@ const openEditForm = () => {
 
   editPopup.open();
 };
-
-cardsList.renderItems();
 
 addButton.addEventListener("click", openAddForm);
 editButton.addEventListener("click", openEditForm);
