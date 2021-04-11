@@ -1,4 +1,11 @@
 .user__avatar-wrapper {
   position: relative;
   border-radius: 50%;
+  max-height: 120px;
+}
+
+@media screen and (max-width: 660px) {
+  .user__avatar-wrapper {
+    margin-bottom: 26px;
+  }
 }
