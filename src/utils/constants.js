@@ -1,3 +1,6 @@
+export const authToken = "b840dc47-080d-4028-b958-7f9f9e1effeb";
+export const baseUrl = "https://mesto.nomoreparties.co/v1/cohort-22";
+
 export const selectors = {
   avatarSelector: ".user__avatar",
   nameSelector: ".user__name",

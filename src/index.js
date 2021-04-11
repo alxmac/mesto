@@ -8,7 +8,9 @@ import { PopupWithForm } from "./components/PopupWithForm.js";
 import { Section } from "./components/Section.js";
 import { UserInfo } from "./components/UserInfo.js";
 import {
+  authToken,
   addButton,
+  baseUrl,
   editButton,
   formList,
   selectors,
@@ -27,10 +29,12 @@ const {
   previewPopupSelector,
 } = selectors;
 
+let userId = "";
+
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-22",
+  baseUrl,
   headers: {
-    authorization: "b840dc47-080d-4028-b958-7f9f9e1effeb",
+    authorization: authToken,
     "Content-Type": "application/json",
   },
 });
@@ -45,8 +49,9 @@ api
   .getUserInfo()
   .then((data) => {
     userUnfo.setUserInfo(data);
+    userId = data._id;
   })
-  .catch((err) => handleError(err));
+  .catch((err) => console.log(err));
 
 const cardsList = new Section(
   {
@@ -102,7 +107,31 @@ const editPopup = new PopupWithForm(editPopupSelector, (data) => {
 const previewPopup = new PopupWithImage(previewPopupSelector);
 
 const createCard = (data) => {
-  const card = new Card(data, "#card", handleCardClick, handleCardDeleteClick);
+  const card = new Card(
+    data,
+    "#card",
+    userId,
+    (cardId) => {
+      api
+        .addLike(cardId)
+        .then(({ likes }) => {
+          card.updateLikes(likes);
+          card.toggleLikeButton();
+        })
+        .catch((err) => console.log(err));
+    },
+    (cardId) => {
+      api
+        .removeLike(cardId)
+        .then(({ likes }) => {
+          card.updateLikes(likes);
+          card.toggleLikeButton();
+        })
+        .catch((err) => console.log(err));
+    },
+    handleCardClick,
+    handleCardDeleteClick
+  );
   const cardElement = card.generateCard();
 
   return cardElement;
