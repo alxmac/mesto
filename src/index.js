@@ -73,13 +73,18 @@ api
   .catch((err) => console.log(err));
 
 const addPopup = new PopupWithForm(addPopupSelector, (data) => {
+  addPopup.renderLoading(true);
+
   api
     .addCard(data)
     .then((data) => {
       cardsList.addItem(createCard(data), "prepend");
     })
     .catch((err) => console.log(err))
-    .finally(() => addPopup.close());
+    .finally(() => {
+      addPopup.renderLoading(false);
+      addPopup.close();
+    });
 });
 
 const confirmationPopup = new PopupWithConfirmation(
@@ -97,33 +102,40 @@ const confirmationPopup = new PopupWithConfirmation(
 );
 
 const editPopup = new PopupWithForm(editPopupSelector, (data) => {
+  editPopup.renderLoading(true);
+
   api
     .editUserInfo(data)
     .then((data) => {
       userUnfo.setUserInfo(data);
     })
     .catch((err) => console.log(err))
-    .finally(() => editPopup.close());
+    .finally(() => {
+      editPopup.renderLoading(false);
+      editPopup.close();
+    });
 });
 
 const previewPopup = new PopupWithImage(previewPopupSelector);
 
 const updatePopup = new PopupWithForm(updatePopupSelector, (data) => {
+  updatePopup.renderLoading(true);
+
   api
     .editUserAvatar(data)
     .then((data) => {
       userUnfo.setUserInfo(data);
     })
     .catch((err) => console.log(err))
-    .finally(() => updatePopup.close());
+    .finally(() => {
+      updatePopup.renderLoading(false);
+      updatePopup.close();
+    });
 });
 
 const createCard = (data) => {
-  const card = new Card(
-    data,
-    "#card",
-    userId,
-    (cardId) => {
+  const card = new Card(data, "#card", userId, {
+    addLike: (cardId) => {
       api
         .addLike(cardId)
         .then(({ likes }) => {
@@ -132,7 +144,7 @@ const createCard = (data) => {
         })
         .catch((err) => console.log(err));
     },
-    (cardId) => {
+    removeLike: (cardId) => {
       api
         .removeLike(cardId)
         .then(({ likes }) => {
@@ -142,8 +154,8 @@ const createCard = (data) => {
         .catch((err) => console.log(err));
     },
     handleCardClick,
-    handleCardDeleteClick
-  );
+    handleCardDeleteClick,
+  });
   const cardElement = card.generateCard();
 
   return cardElement;

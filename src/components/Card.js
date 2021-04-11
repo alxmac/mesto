@@ -3,10 +3,7 @@ export class Card {
     { _id, likes, link, name },
     cardSelector,
     userId,
-    addLike,
-    removeLike,
-    handleCardClick,
-    handleCardDeleteClick
+    { addLike, removeLike, handleCardClick, handleCardDeleteClick }
   ) {
     this._cardId = _id;
     this._userId = userId;
