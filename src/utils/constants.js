@@ -9,6 +9,7 @@ export const selectors = {
   confirmationPopupSelector: ".popup_type_confirmation",
   editPopupSelector: ".popup_type_edit-form",
   previewPopupSelector: ".popup_type_preview-image",
+  updatePopupSelector: ".popup_type_update-form",
 };
 
 export const validationSettings = {
@@ -22,6 +23,7 @@ export const validationSettings = {
 export const formList = Array.from(document.querySelectorAll(".form"));
 export const addButton = document.querySelector(".user__button_type_add");
 export const editButton = document.querySelector(".user__button_type_edit");
+export const updateButton = document.querySelector(".user__button_type_update");
 export const userNameInput = document.querySelector(
   ".form__input_el_user-name"
 );

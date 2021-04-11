@@ -61,6 +61,16 @@ export class Api {
     }).then((res) => this._handleResponse(res));
   }
 
+  editUserAvatar({ link }) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    }).then((res) => this._handleResponse(res));
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,

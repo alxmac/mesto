@@ -15,6 +15,7 @@ import {
   formList,
   selectors,
   validationSettings,
+  updateButton,
   userNameInput,
   userDescriptionInput,
 } from "./utils/constants.js";
@@ -27,6 +28,7 @@ const {
   editPopupSelector,
   nameSelector,
   previewPopupSelector,
+  updatePopupSelector,
 } = selectors;
 
 let userId = "";
@@ -106,6 +108,16 @@ const editPopup = new PopupWithForm(editPopupSelector, (data) => {
 
 const previewPopup = new PopupWithImage(previewPopupSelector);
 
+const updatePopup = new PopupWithForm(updatePopupSelector, (data) => {
+  api
+    .editUserAvatar(data)
+    .then((data) => {
+      userUnfo.setUserInfo(data);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => updatePopup.close());
+});
+
 const createCard = (data) => {
   const card = new Card(
     data,
@@ -153,8 +165,11 @@ const openEditForm = () => {
   editPopup.open();
 };
 
+const openUpdateForm = () => updatePopup.open();
+
 addButton.addEventListener("click", openAddForm);
 editButton.addEventListener("click", openEditForm);
+updateButton.addEventListener("click", openUpdateForm);
 
 formList.forEach((formElement) => {
   if (formElement.id === "confirm") return;

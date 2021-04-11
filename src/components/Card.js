@@ -20,14 +20,6 @@ export class Card {
     this._name = name;
   }
 
-  _checkLikedState() {
-    if (!this._likes.length) return (this._isLiked = false);
-
-    return this._likes.some(({ _id }) =>
-      _id === this._userId ? (this._isLiked = true) : (this._isLiked = false)
-    );
-  }
-
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -39,7 +31,7 @@ export class Card {
 
   _renderLikes() {
     this._likesCount.textContent = this._likes.length;
-    this._checkLikedState();
+    this._setLikedState();
 
     if (this._isLiked) {
       this._likeButton.classList.add("card__button_type_like-active");
@@ -64,6 +56,14 @@ export class Card {
     });
   }
 
+  _setLikedState() {
+    if (!this._likes.length) return (this._isLiked = false);
+
+    return this._likes.some(({ _id }) =>
+      _id === this._userId ? (this._isLiked = true) : (this._isLiked = false)
+    );
+  }
+
   toggleLikeButton() {
     this._likeButton.classList.toggle("card__button_type_like-active");
   }
@@ -71,7 +71,7 @@ export class Card {
   updateLikes(likes) {
     this._likes = likes;
     this._likesCount.textContent = this._likes.length;
-    this._checkLikedState();
+    this._isLiked = !this._isLiked;
   }
 
   generateCard() {
