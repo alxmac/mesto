@@ -22,7 +22,11 @@
       <main class="content">
         <!-- Секция user -->
         <section class="user">
-          <img src="" alt="Аватар" class="user__avatar" />
+          <div class="user__avatar-wrapper">
+            <img src="" alt="Аватар" class="user__avatar" />
+            <button type="button" class="user__button user__button_type_update">
+          </div>
+          </button>
           <div class="user__panel">
             <div class="user__info">
               <h1 class="user__name"></h1>
@@ -137,6 +141,32 @@
             <img alt="#" src="#" class="preview-image__image" />
             <figcaption class="preview-image__caption"></figcaption>
           </figure>
+          <button
+            type="button"
+            class="close-button popup__close-button"
+          ></button>
+        </div>
+      </section>
+
+      <!-- Попап обновления аватара -->
+      <section class="popup inner-layout__popup popup_type_update-form">
+        <div class="popup__container">
+          <form name="update" id="update" class="form">
+            <h3 class="form__heading">Обновить аватар</h3>
+            <label class="form__field">
+              <input
+                required
+                id="link-input"
+                name="link"
+                type="url"
+                autocomplete="off"
+                placeholder="Ссылка на картинку"
+                class="form__input form__input_el_link"
+              />
+              <span class="link-input-error form__input-error"></span>
+            </label>
+            <input class="form__submit-button" type="submit" />
+          </form>
           <button
             type="button"
             class="close-button popup__close-button"

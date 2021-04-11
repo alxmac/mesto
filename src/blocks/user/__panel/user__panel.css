@@ -1,4 +1,5 @@
 .user__panel {
+  margin-left: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,6 +16,7 @@
 
 @media screen and (max-width: 660px) {
   .user__panel {
+    margin-left: 0;
     align-items: center;
     align-self: stretch;
   }

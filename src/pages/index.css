@@ -45,6 +45,7 @@
 
 /* блок user */
 @import url(../blocks/user/user.css);
+@import url(../blocks/user/__avatar-wrapper/user__avatar-wrapper.css);
 @import url(../blocks/user/__avatar/user__avatar.css);
 @import url(../blocks/user/__panel/user__panel.css);
 @import url(../blocks/user/__info/user__info.css);
@@ -53,6 +54,7 @@
 @import url(../blocks/user/__button/user__button.css);
 @import url(../blocks/user/__button/_type/user__button_type_add.css);
 @import url(../blocks/user/__button/_type/user__button_type_edit.css);
+@import url(../blocks/user/__button/_type/user__button_type_update.css);
 
 /* блок cards */
 @import url(../blocks/cards/cards.css);
