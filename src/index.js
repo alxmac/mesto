@@ -134,7 +134,9 @@ const updatePopup = new PopupWithForm(updatePopupSelector, (data) => {
 });
 
 const createCard = (data) => {
-  const card = new Card(data, "#card", userId, {
+  const isOwner = data.owner._id === userId;
+  
+  const card = new Card(data, "#card", userId, isOwner, {
     addLike: (cardId) => {
       api
         .addLike(cardId)

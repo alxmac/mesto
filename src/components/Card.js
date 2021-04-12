@@ -3,11 +3,13 @@ export class Card {
     { _id, likes, link, name },
     cardSelector,
     userId,
+    isOwner,
     { addLike, removeLike, handleCardClick, handleCardDeleteClick }
   ) {
+    this._cardSelector = cardSelector;
     this._cardId = _id;
     this._userId = userId;
-    this._cardSelector = cardSelector;
+    this._isOwner = isOwner;
     this._addLike = addLike;
     this._removeLike = removeLike;
     this._handleCardClick = handleCardClick;
@@ -26,6 +28,11 @@ export class Card {
     return cardElement;
   }
 
+  _removeTrashButton() {
+    this._trashButton.remove();
+    this._trashButton = null;
+  }
+
   _renderLikes() {
     this._likesCount.textContent = this._likes.length;
     this._setLikedState();
@@ -36,9 +43,8 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._cardElement
-      .querySelector(".card__button_type_trash")
-      .addEventListener("click", () => {
+    this._isOwner &&
+      this._trashButton.addEventListener("click", () => {
         this._handleCardDeleteClick(this._cardElement, this._cardId);
       });
 
@@ -79,11 +85,15 @@ export class Card {
       ".card__button_type_like"
     );
     this._likesCount = this._cardElement.querySelector(".card__likes-count");
+    this._trashButton = this._cardElement.querySelector(
+      ".card__button_type_trash"
+    );
 
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardElement.querySelector(".card__title").textContent = this._name;
 
+    !this._isOwner && this._removeTrashButton();
     this._renderLikes();
     this._setEventListeners();
 
