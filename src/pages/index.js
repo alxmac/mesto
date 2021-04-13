@@ -10,17 +10,21 @@ import { UserInfo } from "../components/UserInfo.js";
 import {
   addButton,
   addForm,
+  addFormSubmitButton,
   authToken,
   baseUrl,
   editButton,
   editForm,
+  editFormSubmitButton,
   selectors,
   validationSettings,
   updateButton,
   updateForm,
+  updateFormSubmitButton,
   userNameInput,
   userDescriptionInput,
 } from "../utils/constants.js";
+import { renderLoading, finishLoading } from "../utils/utils.js";
 
 const {
   addPopupSelector,
@@ -44,19 +48,11 @@ const api = new Api({
   },
 });
 
-const userUnfo = new UserInfo({
+const userInfo = new UserInfo({
   nameSelector,
   descriptionSelector,
   avatarSelector,
 });
-
-api
-  .getUserInfo()
-  .then((data) => {
-    userUnfo.setUserInfo(data);
-    userId = data._id;
-  })
-  .catch((err) => console.log(err));
 
 const cardsList = new Section(
   {
@@ -69,14 +65,21 @@ const cardsList = new Section(
 );
 
 api
-  .getInitialCards()
+  .getInitialData()
   .then((data) => {
-    cardsList.renderItems(data);
+    const [userData, cardsData] = data;
+
+    userId = userData._id;
+    userInfo.setUserInfo(userData);
+    cardsList.renderItems(cardsData);
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.log(err);
+  });
 
 const addPopup = new PopupWithForm(addPopupSelector, (data) => {
-  addPopup.renderLoading(true);
+  const initialValueSubmitButton = addFormSubmitButton.value;
+  renderLoading(addFormSubmitButton);
 
   api
     .addCard(data)
@@ -86,7 +89,7 @@ const addPopup = new PopupWithForm(addPopupSelector, (data) => {
     .then(() => addPopup.close())
     .catch((err) => console.log(err))
     .finally(() => {
-      addPopup.renderLoading(false);
+      finishLoading(addFormSubmitButton, initialValueSubmitButton);
     });
 });
 
@@ -105,34 +108,36 @@ const confirmationPopup = new PopupWithConfirmation(
 );
 
 const editPopup = new PopupWithForm(editPopupSelector, (data) => {
-  editPopup.renderLoading(true);
+  const initialValueSubmitButton = editFormSubmitButton.value;
+  renderLoading(editFormSubmitButton);
 
   api
     .editUserInfo(data)
     .then((data) => {
-      userUnfo.setUserInfo(data);
+      userInfo.setUserInfo(data);
     })
     .then(() => editPopup.close())
     .catch((err) => console.log(err))
     .finally(() => {
-      editPopup.renderLoading(false);
+      finishLoading(editFormSubmitButton, initialValueSubmitButton);
     });
 });
 
 const previewPopup = new PopupWithImage(previewPopupSelector);
 
 const updatePopup = new PopupWithForm(updatePopupSelector, (data) => {
-  updatePopup.renderLoading(true);
+  const initialValueSubmitButton = updateFormSubmitButton.value;
+  renderLoading(updateFormSubmitButton);
 
   api
     .editUserAvatar(data)
     .then((data) => {
-      userUnfo.setUserInfo(data);
+      userInfo.setUserInfo(data);
     })
     .then(() => updatePopup.close())
     .catch((err) => console.log(err))
     .finally(() => {
-      updatePopup.renderLoading(false);
+      finishLoading(updateFormSubmitButton, initialValueSubmitButton);
     });
 });
 
@@ -174,7 +179,7 @@ const handleCardDeleteClick = (card, cardId) =>
 const openAddForm = () => addPopup.open();
 
 const openEditForm = () => {
-  const { name, description } = userUnfo.getUserInfo();
+  const { name, description } = userInfo.getUserInfo();
 
   userNameInput.value = name;
   userDescriptionInput.value = description;

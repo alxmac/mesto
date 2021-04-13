@@ -35,3 +35,13 @@ export const userDescriptionInput = document.querySelector(
 export const addForm = document.getElementById("add");
 export const editForm = document.getElementById("edit");
 export const updateForm = document.getElementById("update");
+
+export const addFormSubmitButton = addForm.querySelector(
+  ".form__submit-button"
+);
+export const editFormSubmitButton = editForm.querySelector(
+  ".form__submit-button"
+);
+export const updateFormSubmitButton = updateForm.querySelector(
+  ".form__submit-button"
+);
