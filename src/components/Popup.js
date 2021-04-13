@@ -34,6 +34,7 @@ export class Popup {
 
   open() {
     this._popup.classList.add("popup_fade-in");
+    this._popup.classList.remove("popup_fade-out");
     this.setEventListeners();
   }
 

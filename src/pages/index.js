@@ -1,28 +1,31 @@
-import "./pages/index.css";
-import { Api } from "./components/Api.js";
-import { Card } from "./components/Card.js";
-import { FormValidator } from "./components/FormValidator.js";
-import { PopupWithConfirmation } from "./components/PopupWithConfirmation.js";
-import { PopupWithImage } from "./components/PopupWithImage.js";
-import { PopupWithForm } from "./components/PopupWithForm.js";
-import { Section } from "./components/Section.js";
-import { UserInfo } from "./components/UserInfo.js";
+import "./index.css";
+import { Api } from "../components/Api.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { Section } from "../components/Section.js";
+import { UserInfo } from "../components/UserInfo.js";
 import {
-  authToken,
   addButton,
+  addForm,
+  authToken,
   baseUrl,
   editButton,
-  formList,
+  editForm,
   selectors,
   validationSettings,
   updateButton,
+  updateForm,
   userNameInput,
   userDescriptionInput,
-} from "./utils/constants.js";
+} from "../utils/constants.js";
 
 const {
   addPopupSelector,
   avatarSelector,
+  cardsSelector,
   confirmationPopupSelector,
   descriptionSelector,
   editPopupSelector,
@@ -62,7 +65,7 @@ const cardsList = new Section(
       cardsList.addItem(cardElement);
     },
   },
-  ".cards"
+  cardsSelector
 );
 
 api
@@ -80,10 +83,10 @@ const addPopup = new PopupWithForm(addPopupSelector, (data) => {
     .then((data) => {
       cardsList.addItem(createCard(data), "prepend");
     })
+    .then(() => addPopup.close())
     .catch((err) => console.log(err))
     .finally(() => {
       addPopup.renderLoading(false);
-      addPopup.close();
     });
 });
 
@@ -96,8 +99,8 @@ const confirmationPopup = new PopupWithConfirmation(
         card.remove();
         card = null;
       })
-      .catch((err) => console.log(err))
-      .finally(() => confirmationPopup.close());
+      .then(() => confirmationPopup.close())
+      .catch((err) => console.log(err));
   }
 );
 
@@ -109,10 +112,10 @@ const editPopup = new PopupWithForm(editPopupSelector, (data) => {
     .then((data) => {
       userUnfo.setUserInfo(data);
     })
+    .then(() => editPopup.close())
     .catch((err) => console.log(err))
     .finally(() => {
       editPopup.renderLoading(false);
-      editPopup.close();
     });
 });
 
@@ -126,16 +129,16 @@ const updatePopup = new PopupWithForm(updatePopupSelector, (data) => {
     .then((data) => {
       userUnfo.setUserInfo(data);
     })
+    .then(() => updatePopup.close())
     .catch((err) => console.log(err))
     .finally(() => {
       updatePopup.renderLoading(false);
-      updatePopup.close();
     });
 });
 
 const createCard = (data) => {
   const isOwner = data.owner._id === userId;
-  
+
   const card = new Card(data, "#card", userId, isOwner, {
     addLike: (cardId) => {
       api
@@ -185,10 +188,16 @@ addButton.addEventListener("click", openAddForm);
 editButton.addEventListener("click", openEditForm);
 updateButton.addEventListener("click", openUpdateForm);
 
-formList.forEach((formElement) => {
-  if (formElement.id === "confirm") return;
+const addCardFormValidator = new FormValidator(validationSettings, addForm);
+const editProfileFormValidator = new FormValidator(
+  validationSettings,
+  editForm
+);
+const updateAvatarFormValidator = new FormValidator(
+  validationSettings,
+  updateForm
+);
 
-  const validator = new FormValidator(validationSettings, formElement);
-
-  validator.enableValidation();
-});
+addCardFormValidator.enableValidation();
+editProfileFormValidator.enableValidation();
+updateAvatarFormValidator.enableValidation();
